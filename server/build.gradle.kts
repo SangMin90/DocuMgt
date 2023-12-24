@@ -18,6 +18,8 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.mariadb.jdbc:mariadb-java-client")
+	testRuntimeOnly("com.h2database:h2")
 }
 
 tasks.withType<Test> {
