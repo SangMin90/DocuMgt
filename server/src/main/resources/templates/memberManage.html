@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/member-manage.css">
+    <title>User Management</title>
+</head>
+<body>
+    <div class="container">
+        <section class="search-section">
+            <label for="searchType">검색구분</label>
+            <select id="searchType">
+                <option value="username">사용자명</option>
+                <option value="id">아이디</option>
+                <option value="email">이메일</option>
+            </select>
+            <input type="text" id="ipt_search" placeholder="검색어를 입력해주세요">
+            <button id="btn_search">검색</button>
+        </section>
+        <div>
+            <button id="btn_register" onclick="openRegisterModal()">사용자등록</button>
+            <div id="registerModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeRegisterModal()">&times;</span>
+                    <h2>사용자 등록</h2>
+                    <div>
+                        <label for="username">사용자명:</label>
+                        <div>
+                            <input type="text" id="username" placeholder="사용자명을 입력해주세요.">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email">이메일:</label>
+                        <div>
+                        <input type="text" id="emailId">
+                        <span>@</span>
+                        <input type="text" id="emailDomain">
+                        <select id="emailDomainSelect">
+                            <option value="example.com">example.com</option>
+                            <option value="gmail.com">gmail.com</option>
+                            <!-- Add more domains as needed -->
+                        </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="contact">연락처:</label>
+                        <div>
+                            <input type="text" id="contact" placeholder="연락처를 입력해주세요.">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="userRole">사용자권한:</label>
+                        <div>
+                        <select id="userRole">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                            <!-- Add more roles as needed -->
+                        </select>
+                        </div> 
+                    </div>
+                    <div>
+                        <button onclick="registerUser()">Register</button>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <section class="user-list-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>사용자명</th>
+                        <th>연락처</th>
+                        <th>이메일</th>
+                        <th>직급</th>
+                        <th>사용자권한</th>
+                        <th>상태</th>
+                        <th>사용여부</th>
+                    </tr>
+                </thead>
+                <tbody id="userList">
+                    
+                </tbody>
+            </table>
+        </section>
+        <script src="/js/MemberManage.js"></script>
+    </div>
+</body>
+</html>
