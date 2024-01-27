@@ -1,0 +1,97 @@
+.Rectangle-1 {
+  width: 1245px;
+  height: 720px;
+  padding: 86px 89px 288px 61px;
+  background-color: #fff;
+}
+
+.MGTDocu- {
+  width: 1095px;
+  height: 50px;
+  margin: 0 0 9px;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+  background-color: aqua;
+}
+
+.MGTDocu-2 {
+  width: 1095px;
+  height: 70px;
+  display: flex;
+  margin: 0 0 9px;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+  /* background-color: saddlebrown; */
+}
+
+.Rectangle-3 {
+  width: 100px;
+  height: 40px;
+  margin: 9px 2px 12px 0;
+  padding: 5px 29.7px 6.2px 405px;
+  border-radius: 15px;
+  border: solid 1px #000;
+  background-color: #fff;
+}
+
+.Vector {
+  width: 52.3px;
+  height: 47.8px;
+  right: 10px;
+  flex-grow: 0;
+  background-color: #000;
+}
+
+.submitbutton {
+  margin-top: 5px;
+  margin-left: 150px;
+  text-align: center;
+  width: 94px;
+  height: 59px;
+  font-family: Inter;
+  font-size: 20px;
+  color: #000;
+  background-color: skyblue;
+}
+
+.No {
+  width: 71px;
+  height: 54px;
+  margin: 12px 69px 0 0;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  height: 40px;
+}
+
+td,th {
+  border: 1px solid black;
+  padding: 10px 20px;
+}
