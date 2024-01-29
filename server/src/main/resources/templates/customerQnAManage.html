@@ -7,7 +7,7 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="Rectangle-1">
+  <div class="container">
     <div class="MGTDocu-">
       MGTDocu / 문의관리
     </div>
@@ -16,50 +16,96 @@
       <form action="">
         <input class="Rectangle-3" type="text" />
       </form>
-      <button class="submitbutton">등록</button>
+      <button id="btn_register" onclick="openRegisterModal()" class="submitbutton">등록</button>
     </div>
-    <table>
-      <tr>
-        <td>No.</td>
-        <td>구분</td>
-        <td>제목</td>
-        <td>회사명</td>
-        <td>성명</td>
-        <td>연락처</td>
-        <td>이메일</td>
-        <td>문의등록일</td>        
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>일반</td>
-        <td>문의내용</td>
-        <td>A 컴퍼니</td>
-        <td>뮤탈</td>
-        <td>010-1234-1234</td>
-        <td>abc@gmail.com</td>
-        <td>2024-01-22 14:13:00</td>        
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>        
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>        
-      </tr>
-    </table>    
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeRegisterModal()">&times;</span>
+          <h2>사용자 등록</h2>
+          <div>
+              <label for="username">사용자명:</label>
+              <div>
+                  <input type="text" id="username" placeholder="사용자명을 입력해주세요.">
+              </div>
+          </div>
+          <div>
+              <label for="email">이메일:</label>
+              <div>
+              <input type="text" id="emailId">
+              <span>@</span>
+              <input type="text" id="emailDomain">
+              <select id="emailDomainSelect">
+                  <option value="example.com">example.com</option>
+                  <option value="gmail.com">gmail.com</option>
+                  <!-- Add more domains as needed -->
+              </select>
+              </div>
+          </div>
+          <div>
+              <label for="contact">연락처:</label>
+              <div>
+                  <input type="text" id="contact" placeholder="연락처를 입력해주세요.">
+              </div>
+          </div>
+          <div>
+              <label for="userRole">사용자권한:</label>
+              <div>
+              <select id="userRole">
+                  <option value="admin">Admin</option>
+                  <option value="user">User</option>
+                  <!-- Add more roles as needed -->
+              </select>
+              </div> 
+          </div>
+          <div>
+              <button onclick="registerUser()">Register</button>
+          </div>
+      </div>
+      <section>
+        <table>
+          <tr>
+            <td>No.</td>
+            <td>구분</td>
+            <td>제목</td>
+            <td>회사명</td>
+            <td>성명</td>
+            <td>연락처</td>
+            <td>이메일</td>
+            <td>문의등록일</td>        
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>일반</td>
+            <td>문의내용</td>
+            <td>A 컴퍼니</td>
+            <td>뮤탈</td>
+            <td>010-1234-1234</td>
+            <td>abc@gmail.com</td>
+            <td>2024-01-22 14:13:00</td>        
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>        
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>        
+          </tr>
+        </table>    
+      </section>    
+      <script src="/js/customer-qna-manage.js"></script>
   </div>
   <div>
 
