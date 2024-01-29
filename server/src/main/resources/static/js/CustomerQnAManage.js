@@ -1,23 +1,13 @@
-// 사용자 등록 팝업 열기
-function openRegisterModal() {
-  var registerModal = document.getElementById("registerModal");
-  registerModal.style.display = "block";
+function openModal() {
+  document.getElementById("modal").style.display = "block";
 }
 
-// 사용자 등록 팝업 닫기
-function closeRegisterModal() {
-  var registerModal = document.getElementById("registerModal");
-  registerModal.style.display = "none";
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
 }
 
-// 사용자 등록 함수
-function registerUser() {
-  
-  var username = document.getElementById("username").value;
-  var email = document.getElementById("emailId").value + "@" + document.getElementById("emailDomainSelect").value;
-  var contact = document.getElementById("contact").value;
-  var userRole = document.getElementById("userRole").value;
-
-  // 등록 후 팝업 닫기
-  closeRegisterModal();
+function confirmModal() {
+  // 여기에 확인 버튼 클릭 시 수행할 동작 추가
+  console.log("확인 버튼이 클릭되었습니다.");
+  closeModal();
 }

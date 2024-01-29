@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문의 관리</title>
+    <title>자주하는 질문</title>
     <link rel="stylesheet" href="/css/customer-qna-manage.css">
     <script src="/js/CustomerQnAManage.js"></script>
 </head>
 <body>
-    <div id="header">문의관리</div>
+    <div id="header">자주하는 질문</div>
     <div id="search-container">
         <input type="text" id="search-input" placeholder="검색어를 입력하세요">
         <button id="register-button" onclick="openModal()">등록</button>
@@ -19,21 +19,13 @@
                 <th>No</th>
                 <th>구분</th>
                 <th>제목</th>
-                <th>회사명</th>
-                <th>성명</th>
-                <th>연락처</th>
-                <th>이메일</th>
-                <th>문의등록일</th>
+                <th>내용</th>
             </tr>
             <tr>
               <td>1</td>
               <td>일반</td>
-              <td>문의내용</td>
-              <td>A 컴퍼니</td>
-              <td>뮤탈</td>
-              <td>010-1234-1234</td>
-              <td>abc@gmail.com</td>
-              <td>2024-01-22 14:13:00</td>        
+              <td>업로드 할 때, xml 파일이 업로드 되지 않아요.</td>
+              <td>첨부파일은 이미지 파일과 PDF 등의 문서 파일만 첨부가 가능합니다.</td>
             </tr>
         </thead>
         <!-- 데이터를 동적으로 추가하는 부분은 JavaScript를 사용하게 됩니다. -->
@@ -43,8 +35,8 @@
           <label for="category">구분:</label>
           <select id="category">
               <!-- 여기에 구분 옵션들을 추가하세요 -->
-              <option value="옵션1">옵션1</option>
-              <option value="옵션2">옵션2</option>
+              <option value="옵션1">첨부파일</option>
+              <option value="옵션2">게시글 작성</option>
           </select>
       </div>
       <div class="form-group">
@@ -52,20 +44,8 @@
           <input type="text" id="title">
       </div>
       <div class="form-group">
-          <label for="company">회사명:</label>
-          <input type="text" id="company">
-      </div>
-      <div class="form-group">
-          <label for="name">성명:</label>
-          <input type="text" id="name">
-      </div>
-      <div class="form-group">
-          <label for="contact">연락처:</label>
-          <input type="text" id="contact">
-      </div>
-      <div class="form-group">
-          <label for="email">이메일:</label>
-          <input type="text" id="email">
+          <label for="content">답변 등록:</label>
+          <input type="text" id="content">
       </div>
       <div class="modal-buttons">
         <button class="modal-confirm-button" onclick="confirmModal()">확인</button>  
