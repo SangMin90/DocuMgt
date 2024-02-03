@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹 페이지 제목</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 200px;
+        }
+
+        nav {
+            background-color: skyblue;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            position: relative;
+        }
+
+        nav ul li {
+            position: relative;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        nav ul ul {
+            display: none;
+            position: absolute;
+            background-color: skyblue;
+            width: 150px;
+            top: 100%;
+            left: 0;
+            margin-top: -1px;
+        }
+
+        nav ul li:hover > ul {
+            display: flex;
+            flex-direction: column;
+            top: 100%;
+            left: 0;
+        }
+
+        nav ul li ul li {
+            margin: 0;
+        }
+
+        header img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="apple_logo.png" alt="애플 로고">
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#">문서관리</a>
+            <ul>
+                <li><a href="#">프로젝트관리</a></li>
+                <li><a href="/business/card">명함관리</a></li>
+            </ul>
+        </li>
+        <li><a href="#">고객센터</a>
+            <ul>
+                <li><a href="#">1:1문의</a></li>
+                <li><a href="/customer/qna">Q&A</a></li>
+                <li><a href="/customer/faq">FAQ</a></li>
+                <li><a href="#">공지사항</a></li>
+            </ul>
+        </li>
+        <li><a href="#">관리자</a>
+            <ul>
+                <li><a href="/member/manage">사용자관리</a></li>
+                <li><a href="#">권한관리</a></li>
+                <li><a href="#">키워드관리</a></li>
+                <li><a href="#">공통코드관리</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<!-- 이 아래에 내용을 추가하거나 웹 페이지 구성을 계속 진행하세요 -->
+
+</body>
+</html>
