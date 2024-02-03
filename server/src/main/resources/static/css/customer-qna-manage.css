@@ -82,21 +82,21 @@ body {
 }
 
 .form-group label {
-: 8px;
+  display: inline-block;
+  width: 100px; /* 라벨 너비 조절 */
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  width: calc(100% - 120px); /* 입력창 너비 조절 */
+  padding: 8px;
   margin-top: 5px;
   box-sizing: border-box;
 }
 .form-group {
     margin-bottom: 10px;
-}  display: inline-block;
-   width: 100px; /* 라벨 너비 조절 */
-   font-weight: bold;
- }
-
- .form-group input,
- .form-group select {
-   width: calc(100% - 120px); /* 입력창 너비 조절 */
-   padding
+}
 .form-group label {
     display: block;
     font-weight: bold;
