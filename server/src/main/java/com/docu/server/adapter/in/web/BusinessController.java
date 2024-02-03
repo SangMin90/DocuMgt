@@ -8,6 +8,6 @@ public class BusinessController {
 
     @GetMapping("/business/card")
     public String businessCard() {
-        return "bussinessCard.html";
+        return "businessCard.html";
     }
 }
