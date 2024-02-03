@@ -15,7 +15,7 @@
         header {
             background-color: #f1f1f1;
             padding: 10px;
-            text-align: center;
+            text-align: left; /* 수정된 부분 */
             margin-bottom: 200px;
         }
 
@@ -44,7 +44,7 @@
 
         nav ul li {
             position: relative;
-            margin: 0 20px;
+            margin: 0 80px;
         }
 
         nav ul li a {
@@ -75,6 +75,7 @@
             margin: 0;
         }
 
+        /* 수정된 부분 */
         header img {
             max-width: 200px;
             height: auto;
@@ -84,31 +85,31 @@
 <body>
 
 <header>
-    <img src="apple_logo.png" alt="애플 로고">
+    <img src="https://cdn.imweb.me/thumbnail/20220908/9ee8ddcfb5039.png" alt="애플 로고">
 </header>
 
 <nav>
     <ul>
         <li><a href="#">문서관리</a>
             <ul>
-                <li><a href="#">프로젝트관리</a></li>
+                <li><a href="#" onclick="alert('구현중인 화면입니다.')">프로젝트관리</a></li>
                 <li><a href="/business/card">명함관리</a></li>
             </ul>
         </li>
         <li><a href="#">고객센터</a>
             <ul>
-                <li><a href="#">1:1문의</a></li>
+                <li><a href="#" onclick="alert('구현중인 화면입니다.')">1:1문의</a></li>
                 <li><a href="/customer/qna">Q&A</a></li>
                 <li><a href="/customer/faq">FAQ</a></li>
-                <li><a href="#">공지사항</a></li>
+                <li><a href="#" onclick="alert('구현중인 화면입니다.')">공지사항</a></li>
             </ul>
         </li>
         <li><a href="#">관리자</a>
             <ul>
                 <li><a href="/member/manage">사용자관리</a></li>
-                <li><a href="#">권한관리</a></li>
-                <li><a href="#">키워드관리</a></li>
-                <li><a href="#">공통코드관리</a></li>
+                <li><a href="#" onclick="alert('구현중인 화면입니다.')">권한관리</a></li>
+                <li><a href="#" onclick="alert('구현중인 화면입니다.')">키워드관리</a></li>
+                <li><a href="#" onclick="alert('구현중인 화면입니다.')">공통코드관리</a></li>
             </ul>
         </li>
     </ul>
