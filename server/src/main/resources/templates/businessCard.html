@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/business-card.css">
+    <title>Business Card</title>
+</head>
+<body>
+<div class="container">
+    <section>
+        <h1>명함 관리</h1>
+        <button id="btn_register">명함 등록</button>
+    </section>
+    <section>
+        <label for="keyword">키워드:</label>
+        <input type="text" id="keyword" name="keyword">
+        <button id="btn_search">검색</button>
+    </section>
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>이름</th>
+                <th>회사명</th>
+                <th>부서(팀)</th>
+                <th>직급</th>
+                <th>연락처</th>
+                <th>이메일</th>
+                <th>메모</th>
+            </tr>
+            </thead>
+            <tbody id="card_list">
+            <tr>
+                <td>1</td>
+                <td>김철수</td>
+                <td>ABC 기업</td>
+                <td>경영지원팀</td>
+                <td>부사장</td>
+                <td>010-1234-5678</td>
+                <td>cheolsu.kim@abc.co.kr</td>
+                <td>기타</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="register_form">
+                <!-- 폼 -->
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    // JavaScript
+</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/business-card-popup.css">
+    <title>Business Card Popup</title>
+</head>
+<body>
+<div class="modal-content">
+    <div class="modal-header border-bottom-0">
+        <h5 class="modal-title">명함 설정</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <form class="form-horizontal" id="RegistForm" accept-charset="utf-8" method="post">
+        <input type="hidden" name="cardIdx" id="cardIdx" value="12">
+        <div class="modal-body p-0">
+            <div class="search-group">
+                <div class="row align-items-center mb-3">
+                    <div class="col-lg-12">
+                        <h4 class="text-primary">명함 정보</h4>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-3">
+                    <div class="row mb-3">
+                        <div class="col-lg-6 col-sm-12 mb-2">
+                            <label class="mb-2 text-muted" style="display: inline-block;"><i class="fas fa-layer-group pr-2"></i>이름<span class="text-critical">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" style="display: inline-block;">
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12 mb-2">
+                            <label class="mb-2 text-muted" style="display: inline-block;"><i class="fas fa-layer-group pr-2"></i>회사명<span class="text-critical">*</span></label>
+                            <input type="text" class="form-control" id="company" name="company" style="display: inline-block;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-3">
+                    <div class="col-lg-6 col-sm-12 mb-2">
+                        <label class="mb-2 text-muted"><i class="fas fa-layer-group pr-2"></i>부서(팀)
+                        </label>
+                        <input type="text" class="form-control" id="company" name="company" style="display: inline-block;">
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2">
+                        <label class="mb-2 text-muted"><i class="fas fa-layer-group pr-2"></i>직급
+                        </label>
+                        <input type="text" class="form-control" id="company" name="company" style="display: inline-block;">
+                    </div>
+                </div>
+                <div class="row align-items-center mb-3">
+                    <div class="col-lg-6 col-sm-12 mb-2">
+                        <label class="mb-2 text-muted"><i class="fas fa-layer-group pr-2"></i>연락처<span class="text-critical">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="company" name="company" style="display: inline-block;">
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2">
+                        <label class="mb-2 text-muted"><i class="fas fa-layer-group pr-2"></i>E-Mail
+                        </label>
+                        <input type="text" class="form-control" id="company" name="company" style="display: inline-block;">
+                    </div>
+                </div>
+                <div class="row align-items-center mb-3">
+                    <div class="col-lg-12 col-sm-12 mb-2">
+                        <label class="mb-2 text-muted"><i class="fas fa-layer-group pr-2"></i>주소
+                        </label>
+                        <input type="text" class="form-control" id="company" name="company" style="display: inline-block;">
+                    </div>
+                </div>
+                <div class="row align-items-center mb-3">
+                    <div class="col-lg-12 col-sm-12 mb-2">
+                        <label class="mb-2 text-muted"><i class="fas fa-layer-group pr-2"></i>비고
+                        </label>
+                        <input type="text" class="form-control" id="company" name="company" style="display: inline-block;">
+                    </div>
+                </div>
+                <div class="row align-items-center mb-3">
+                    <div class="col-lg-12 col-sm-12 mb-2">
+                        <span class="text-critical small d-flex align-items-center"><i class="fas fa-info-circle mr-2"></i>대표 이미지를 선택하세요.</span>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2">
+                        <label class="mb-2 text-muted"><i class="fas fa-layer-group pr-2"></i>이미지 선택(앞면)
+                        </label>
+                        <input class="ml-1" type="radio" name="imageFlag" value="0" checked="">
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2 pr-0 row text-right imageDiv" style="display: none;">
+                        <a id="frontImageDownBtn" href="" class="btn btn-outline-primary ml-auto"><i class="fas fa-download pr-2" download=""></i>다운로드</a>
+                        <input class="btn btn-primary ml-2" id="frontChange" type="button" value="이미지 변경" onclick="fn_show(1);">
+                        <input class="btn btn-primary ml-2" id="frontCancel" type="button" value="변경 취소" onclick="fn_show(3);" style="display: none;">
+                    </div>
+                    <div class="col-lg-12 col-sm-12 mb-2 imageDiv frontGalley" style="display: none;">
+                        <div class="w-100 p-2 border bg-white gallery" id="gallery">
+
+                            <a class="gallery-item item-1x1" id="frontImageA">
+                                <img src="" id="frontImageDiv" style="filter: invert(0);">
+                                <div class="caption"><span>앞면 이미지</span></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 mb-2 frontDiv">
+                        <div class="w-100">
+                            <div class="dropzone-wrapper">
+                                <div class="preview-zone hidden">
+                                    <div class="box box-solid">
+                                        <div class="box-body"></div>
+                                    </div>
+                                </div>
+                                <div class="dropzone-desc">
+                                    <p class="dropzone-text h-100">
+                                        <i class="fas fa-file-upload fa-2x"></i>
+                                        <span id="drapzone-frontImage">등록할 이미지를 드래그해주세요.</span>
+                                    </p>
+                                </div>
+                                <input type="file" id="frontImage" name="frontImage" class="dropzone">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2 mt-3">
+                        <label class="mb-2 text-muted"><i class="fas fa-layer-group pr-2"></i>이미지 선택(뒷면)
+                        </label>
+                        <input class="ml-1" type="radio" name="imageFlag" value="1">
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2 pr-0 row text-right imageDiv" style="display: none;">
+                        <a id="backImageDownBtn" href="" class="btn btn-outline-primary ml-auto"><i class="fas fa-download pr-2" download=""></i>다운로드</a>
+                        <input class="btn btn-primary ml-2" id="backChange" type="button" value="이미지 변경" onclick="fn_show(2);">
+                        <input class="btn btn-primary ml-2" id="backCancel" type="button" value="변경 취소" onclick="fn_show(4);" style="display: none;">
+                    </div>
+                    <div class="col-lg-12 col-sm-12 mb-2 imageDiv backGalley" style="display: none;">
+                        <div class="w-100 p-2 border bg-white gallery" id="gallery2">
+
+                            <a class="gallery-item item-1x1" id="backImageA">
+                                <img src="" id="backImageDiv" style="filter: invert(0);">
+                                <div class="caption"><span>뒷면 이미지</span></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 mb-2 backDiv">
+                        <div class="w-100">
+                            <div class="dropzone-wrapper">
+                                <div class="preview-zone hidden">
+                                    <div class="box box-solid">
+                                        <div class="box-body"></div>
+                                    </div>
+                                </div>
+                                <div class="dropzone-desc">
+                                    <p class="dropzone-text h-100">
+                                        <i class="fas fa-file-upload fa-2x"></i>
+                                        <span id="drapzone-backImage">등록할 이미지를 드래그해주세요.</span>
+                                    </p>
+                                </div>
+                                <input type="file" id="backImage" name="backImage" class="dropzone">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="modal-footer">
+        <input class="btn btn-primary float-right" id="RegistBtn" type="button" value="등록" onclick="fn_insertCardData();">
+        <input class="btn btn-primary float-right update" type="button" value="수정" onclick="fn_updateCardData();" style="display: none;">
+        <input class="btn btn-primary float-right update" type="button" value="삭제" onclick="fn_deleteCardData();" style="display: none;">
+    </div>
+</div>
+</body>
+</html>
