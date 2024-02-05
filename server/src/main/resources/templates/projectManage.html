@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/project-manage.css">
+    <title>프로젝트 관리</title>
+</head>
+<body>
+    <header>
+        <h1>프로젝트 관리</h1>
+    </header>
+
+    <div id="search-container">
+        <div>
+            <label for="search-type">검색 유형:</label>
+            <select id="search-type">
+                <option value="project">프로젝트명</option>
+                <option value="document">문서명</option>
+            </select>
+            <input type="text" id="search-keyword" placeholder="검색어를 입력하세요">
+        </div>
+        <button onclick="searchProjects()">검색</button>
+    </div>
+
+    <div id="project-list">
+        <button id="add-project-btn" onclick="openProjectForm()">프로젝트 등록</button>
+        <table>
+            <thead>
+            <tr>
+                <th>프로젝트명</th>
+                <th>문서명</th>
+                <th>등록자</th>
+                <th>첨부파일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 프로젝트 목록이 여기에 동적으로 추가될 예정 -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 프로젝트 등록 팝업 -->
+    <div id="popup-container">
+        <div id="popup">
+            <label for="project-name" class="popup-input">프로젝트명:</label>
+            <input type="text" id="project-name" class="popup-input">
+
+            <label for="project-type" class="popup-input">프로젝트 구분:</label>
+            <select id="project-type" class="popup-input">
+                <option value="type1">타입 1</option>
+                <option value="type2">타입 2</option>
+            </select>
+
+            <label for="client" class="popup-input">발주처:</label>
+            <input type="text" id="client" class="popup-input">
+
+            <label for="client-contact" class="popup-input">발주처 담당자:</label>
+            <input type="text" id="client-contact" class="popup-input">
+
+            <label for="project-manager" class="popup-input">업무 담당자:</label>
+            <input type="text" id="project-manager" class="popup-input">
+
+            <div class="popup-input">
+                <label for="project-duration" class="popup-input">프로젝트 기간:</label>
+                <input type="date" id="project-start-date" class="popup-input">
+                <span> ~ </span>
+                <input type="date" id="project-end-date" class="popup-input">
+            </div>
+
+            <div class="popup-buttons">
+                <button onclick="closeProjectForm()">닫기</button>
+                <button onclick="saveProject()">등록</button>
+            </div>
+        </div>
+        <script src="/js/ProjectManage.js"></script>
+    </div>
+</body>
+</html>
