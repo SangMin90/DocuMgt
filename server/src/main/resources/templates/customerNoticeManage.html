@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자주하는 질문</title>
-    <link rel="stylesheet" href="/css/customer-faq-manage.css">
-    <script src="/js/CustomerFAQManage.js"></script>
+    <title>공지사항</title>
+    <link rel="stylesheet" href="/css/customer-notice-manage.css">
+    <script src="/js/CustomerNoticeManage.js"></script>
 </head>
 <body>
-    <div id="header">자주하는 질문</div>
+    <div id="header">공지사항</div>
     <div id="search-container">
         <input type="text" id="search-input" placeholder="검색어를 입력하세요">
         <button id="register-button" onclick="openModal()">등록</button>
@@ -23,10 +23,17 @@
             </tr>
             <tr>
               <td>1</td>
-              <td>일반</td>
-              <td>업로드 할 때, xml 파일이 업로드 되지 않아요.</td>
-              <td>첨부파일은 이미지 파일과 PDF 등의 문서 파일만 첨부가 가능합니다.</td>
+              <td>긴급</td>
+              <td>24.02.17 접속불가</td>
+              <td>서버점검으로 인해 24.02.17 접속이 불가능 합니다.</td>
             </tr>
+            <tr>
+                <td>2</td>
+                <td>일반</td>
+                <td>24.03.01 전체회식</td>
+                <td>해당 일자에 전체 회식 예정있습니다. 수고링~</td>
+            </tr>
+
         </thead>
         <!-- 데이터를 동적으로 추가하는 부분은 JavaScript를 사용하게 됩니다. -->
     </table>
@@ -35,8 +42,8 @@
           <label for="category">구분:</label>
           <select id="category">
               <!-- 여기에 구분 옵션들을 추가하세요 -->
-              <option value="옵션1">첨부파일</option>
-              <option value="옵션2">게시글 작성</option>
+              <option value="옵션1">일반</option>
+              <option value="옵션2">긴급</option>
           </select>
       </div>
       <div class="form-group">
@@ -44,11 +51,11 @@
           <input type="text" id="title">
       </div>
       <div class="form-group">
-          <label for="content">답변 등록:</label>
+          <label for="content">내용:</label>
           <input type="text" id="content">
       </div>
       <div class="modal-buttons">
-        <button class="modal-confirm-button" onclick="confirmModal()">확인</button>  
+        <button class="modal-confirm-button" onclick="confirmModal()">확인</button>
         <button class="modal-close-button"onclick="closeModal()">취소</button>
       </div>
     </div>
