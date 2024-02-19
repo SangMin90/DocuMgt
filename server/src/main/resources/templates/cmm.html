@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/cmm.css">
+    <title>공통코드 관리</title>
+</head>
+<body>
+<div class="container">
+    <!-- 검색 파트 -->
+    <div class="search-section">
+        <label for="groupCodeName">공통그룹코드명:</label>
+        <input type="text" id="groupCodeName">
+        <button class="btn" onclick="searchGroupCode()">검색</button>
+    </div>
+
+    <!-- 공통그룹코드 파트 -->
+    <div class="table-section">
+        <div>
+            <h2>공통그룹코드</h2>
+            <button class="btn" onclick="addRow('groupCodeTable')">행추가</button>
+            <button class="btn" onclick="deleteRow('groupCodeTable')">행삭제</button>
+        </div>
+        <table id="groupCodeTable">
+            <thead>
+            <tr>
+                <th>공통그룹코드</th>
+                <th>공통그룹코드명</th>
+                <th>설명</th>
+                <th>사용여부</th>
+                <th>비고</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 공통코드 파트 -->
+    <div class="table-section">
+        <div>
+            <h2>공통코드</h2>
+            <button class="btn" onclick="addRow('codeTable')">행추가</button>
+            <button class="btn" onclick="deleteRow('codeTable')">행삭제</button>
+        </div>
+        <table id="codeTable">
+            <thead>
+            <tr>
+                <th>공통코드</th>
+                <th>공통코드명</th>
+                <th>정렬순서</th>
+                <th>사용여부</th>
+                <th>비고</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <script src="/js/CmmManage.js"></script>
+</div>
+</body>
+</html>
