@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/business-card.css">
-    <script src="/js/BusinessCard.js"></script>
     <title>Business Card</title>
 </head>
 <body>
 <div class="container">
     <section>
-        <h1>명함 관리</h1>
-        <button id="btn_register" onclick="openRegisterModal()">명함 등록</button>
+        <h1>문의사항</h1>
     </section>
     <section>
         <label for="keyword">키워드:</label>
@@ -23,39 +21,24 @@
             <thead>
             <tr>
                 <th>No.</th>
-                <th>이름</th>
-                <th>회사명</th>
-                <th>부서(팀)</th>
-                <th>직급</th>
+                <th>구분</th>
+                <th>성명</th>
                 <th>연락처</th>
                 <th>이메일</th>
-                <th>메모</th>
+                <th>문의등록일</th>
             </tr>
             </thead>
             <tbody id="card_list">
             <tr>
                 <td>1</td>
+                <td>일반</td>
                 <td>김철수</td>
-                <td>ABC 기업</td>
-                <td>경영지원팀</td>
-                <td>부사장</td>
                 <td>010-1234-5678</td>
                 <td>cheolsu.kim@abc.co.kr</td>
-                <td>기타</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>홍길동</td>
-                <td>ZXY 기업</td>
-                <td>회계팀</td>
-                <td>부장</td>
-                <td>010-9876-5432</td>
-                <td>gildong.hong@zxy.co.kr</td>
-                <td>기타</td>
+                <td>2024.01.01</td>
             </tr>
             </tbody>
         </table>
-        <p id="noResultsMessage" style="display: none;">검색 결과가 없습니다.</p>
     </section>
     <div id="registerModal" class="modal">
         <div class="modal-content">
