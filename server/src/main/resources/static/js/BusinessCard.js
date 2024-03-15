@@ -1,7 +1,12 @@
 // 명함 등록 팝업 열기
 function openRegisterModal() {
-    var registerModal = document.getElementById("registerModal");
-    registerModal.style.display = "block";
+    // var registerModal = document.getElementById("registerModal");
+    // registerModal.style.display = "block";
+
+    var url = "/businessCard/popup";
+    var name = "popup test";
+    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+    window.open(url, name, option);
 }
 
 // 명함 등록 팝업 닫기
