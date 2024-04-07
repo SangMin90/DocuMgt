@@ -1,0 +1,9 @@
+@charset "utf-8";
+* {
+   font-size: 14px;
+   line-height: 1.428;
+}
+
+.form-control {
+    font-size: 14px;
+}

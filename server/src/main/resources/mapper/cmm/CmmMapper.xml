@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.docu.server.adapter.out.persistence.cmm.CmmMapper">
+    
+    <select id="selectStdWordList" parameterType="WordSearchEntity" resultType="WordEntity">
+        SELECT
+               id
+             , word_name
+             , eng_word_name
+             , word_desc
+             , reg_user_id
+             , reg_dt
+             , mdfr_user_id
+             , mdfr_dt
+          FROM mgt.cmm_std_word
+        <if test="cmmStdWordNm not in {null, ''}">
+         WHERE word_name LIKE #{cmmStdWordNm}
+        </if>
+    </select>
+
+    <insert id="insertStdWord" parameterType="WordEntity">
+        INSERT INTO mgt.cmm_std_word
+            (
+                word_name
+              , eng_word_name
+              , word_desc
+              , reg_user_id
+              , mdfr_user_id
+            )
+        VALUES
+            (
+                #{wordName}
+              , #{engWordName}
+              , #{wordDesc}
+              , 'admin'
+              , 'admin'
+            )
+    </insert>
+    
+    <select id="exists" parameterType="WordEntity" resultType="java.lang.Integer">
+        SELECT
+               COUNT(*) AS cnt
+        FROM mgt.cmm_std_word
+        <where>
+            <if test="wordName not in {null, ''}">
+                OR word_name = #{wordName}
+            </if>
+            <if test="engWordName not in {null, ''}">
+                OR eng_word_name = #{engWordName}
+            </if>
+        </where>
+    </select>
+</mapper>

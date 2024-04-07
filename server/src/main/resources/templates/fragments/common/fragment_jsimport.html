@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="f_jsimport">
+
+    <!-- **************** 컨텐츠페이지의 CSS 영역 **************** -->
+    <th:block layout:fragment="css"></th:block>
+
+    <!-- **************** 컨텐츠페이지의 스크립트 영역 **************** -->
+    <th:block layout:fragment="script"></th:block>
+
+    <script>
+    //메뉴 자동 활성화 적용 스크립트
+    // /resources/templates/fragments/fragment_jsimport.html
+    $(document).ready(function () {
+        /** add active class and stay opened when selected */
+        var url = window.location;
+
+        // for sidebar menu entirely but not cover treeview
+        $('ul.nav-sidebar a').filter(function() {
+            return this.href == url;
+        }).addClass('active');
+
+        // for treeview
+        $('ul.nav-treeview a').filter(function() {
+            return this.href == url;
+        }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+    });
+
+    //브라우저 종료시 이벤트 발생.
+    /*
+    window.addEventListener("beforeunload", function (e) {
+        var queryString = $("form[name=complex_frm]").serializeObject();
+        $.ajax({
+            type : 'get',
+            url : '/sample',
+            data : queryString,
+            dataType : 'json',
+            error: function(xhr, status, error){
+                console.log(error);
+            },
+            success : function(res){
+            }
+        });
+    });
+    */
+    $.fn.clearForm = function () {
+      return this.each(function () {
+        var type = this.type,
+          tag = this.tagName.toLowerCase();
+        if (tag === "form") {
+          return $(":input", this).clearForm();
+        }
+        if (
+          type === "text" ||
+          type === "password" ||
+          type === "hidden" ||
+          tag === "textarea"
+        ) {
+          this.value = "";
+        } else if (type === "checkbox" || type === "radio") {
+          this.checked = false;
+        } else if (tag === "select") {
+          this.selectedIndex = -1;
+        }
+      });
+    };
+    </script>
+</th:block>
+
+</html>

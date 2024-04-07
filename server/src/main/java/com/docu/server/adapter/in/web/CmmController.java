@@ -8,6 +8,11 @@ public class CmmController {
 
     @GetMapping("/cmm")
     public String renderCmm() {
-        return "cmm.html";
+        return "cmm";
+    }
+
+    @GetMapping("/cmm/std-word")
+    public String renderCmmStdWord() {
+        return "pages/cmm/word";
     }
 }
