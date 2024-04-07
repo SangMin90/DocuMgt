@@ -325,6 +325,36 @@
             });
 
         });
+
+        $("#wordName").blur(function () {
+            var params = $("form[name=add-word-form]").serializeObject();
+            params = JSON.stringify(params);
+            $.ajax({
+                type: 'post',
+                url: '/cmm/std-word/check-duplicate',
+                data: params,
+                contentType: 'application/json',
+                dataType: 'json',
+                error: function (xhr, status, error) {
+                    console.log(error);
+                },
+                success: function (res) {
+                    if(res.statusCode === 200) {
+                        let existFlag = res.data.existFlag;
+
+                        if (existFlag) {
+                            $("#modal-warning-close .modal-body").html("이미 존재하는 공통표준단어가 있습니다.");
+                            $("#modal-warning-close .modal-title").html(res.resultMessage);
+                            $("#modal-warning-close").modal('toggle');
+                        }
+                    }
+                }
+            });
+        })
+
+        function check_duplicate() {
+
+        }
     </script>
 
 </th:block>
