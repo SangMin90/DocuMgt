@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CustomerControllerFaq {
     @GetMapping("/customer/faq")
     public String memberManagement() {
-        return "customerFAQManage.html";
+        return "pages/FAQ/faq";
     }
 }
 
