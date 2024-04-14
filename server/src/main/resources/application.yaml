@@ -13,3 +13,8 @@ resource:
     prefix: classpath:/templates/
     #prefix: file:src/main/resources/templates/
     cache: false
+
+logging:
+  level:
+    root: DEBUG
+    org.springframework.boot: ERROR
