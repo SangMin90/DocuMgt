@@ -11,12 +11,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">자주하는질문</h1>
+            <h1 class="m-0">자주하는 질문</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/main">Home</a></li>
-              <li class="breadcrumb-item active">자주하는질문</li>
+              <li class="breadcrumb-item active">자주하는 질문</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -42,7 +42,6 @@
                   <div class="form-group">
                     <label for="cmmStdWordNm">자주하는질문</label>
                     <input type="text" name="cmmStdWordNm" class="form-control" id="cmmStdWordNm" placeholder="표준단어를 입력하세요.">
-                      <input type="text" name="cmmStdWordNm" class="form-control" id="cmmStdWordNm2" placeholder="야야야">
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -97,7 +96,7 @@
     </section>
     <!-- /.content -->
     <div class="modal fade" id="add-word">
-        <form name="add-word-form" id="add-word-form">
+        <form name="add-faq-form" id="add-faq-form">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -108,16 +107,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="wordName">구분</label>
-                        <input type="text" class="form-control" name="wordName" id="wordName" placeholder="공통표준단어명">
+                        <label for="Category">구분</label>
+                        <input type="text" class="form-control" name="Category" id="Category" placeholder="공통표준단어명">
                     </div>
                     <div class="form-group">
-                        <label for="engWordName">첨부파일 영문명</label>
-                        <input type="text" class="form-control" name="engWordName" id="engWordName" placeholder="공통표준단어 영문명">
+                        <label for="title">제목</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="공통표준단어 영문명">
                     </div>
                     <div class="form-group">
-                        <label for="wordDesc">게시글 작성</label>
-                        <input type="text" class="form-control" name="wordDesc" id="wordDesc" placeholder="공통표준단어 설명">
+                        <label for="contents">내용</label>
+                        <input type="text" class="form-control" name="contents" id="contents" placeholder="공통표준단어 설명">
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -150,14 +149,14 @@
     <!-- <tr data-widget="expandable-table" aria-expanded="{{if #index==0}}true{{else}}false{{/if}}"> -->
     <tr data-widget="expandable-table" aria-expanded="false">
       <td>{{:~getNumber(#getIndex())}}</td>
-      <td>{{:wordName}}</td>
-      <td>{{:engWordName}}</td>
+      <td>{{:Category}}</td>
+      <td>{{:title}}</td>
     </tr>
     <!-- <tr class="expandable-body {{if #index!=0}}d-none{{/if}}"> -->
     <tr class="expandable-body d-none">
       <td colspan="3">
         <p>
-          {{:wordDesc}}
+          {{:contents}}
         </p>
       </td>
     </tr>
@@ -179,7 +178,7 @@
             });
 
             $('#add-word').on('hidden.bs.modal', function (e) { // 모달창 닫기 event
-                var form = $("#add-word-form");
+                var form = $("#add-faq-form");
                  form.clearForm();
                  form.find('.error').removeClass('error');
                  form.find('.is-invalid').removeClass('is-invalid');
@@ -256,28 +255,28 @@
               }
             });
 
-            var validator = $('#add-word-form').validate({
+            var validator = $('#add-faq-form').validate({
 
               rules: {
-                wordName: {
+                Category: {
                   required: true
                 },
-                engWordName: {
+                title: {
                   required: true
                 },
-                wordDesc: {
+                contents: {
                   required: true
                 }
               },
               messages: {
-                wordName: {
-                  required: "공통표준단어명을 입력하세요."
+                Category: {
+                  required: "구분될 카테고리를 입력하세요."
                 },
-                engWordName: {
-                  required: "공통표준단어영문약어명을 입력하세요."
+                title: {
+                  required: "제목을 입력하세요."
                 },
-                wordDesc: {
-                  required: "공통표준단어 설명을 입력하세요."
+                contents: {
+                  required: "질문 내용을 입력하세요."
                 }
               },
               errorElement: 'span',
@@ -298,11 +297,11 @@
         //단어 저장
         $("button[id='save']").click(function () {
 
-            if($("#add-word-form").valid()===false) {
+            if($("#add-faq-form").valid()===false) {
                  return false;
             }
 
-            var params = $("form[name=add-word-form]").serializeObject();
+            var params = $("form[name=add-faq-form]").serializeObject();
             params = JSON.stringify(params);
             $.ajax({
                 type : 'post',
@@ -328,8 +327,8 @@
 
         });
 
-        $("#wordName").blur(function () {
-            var params = $("form[name=add-word-form]").serializeObject();
+        $("#Category").blur(function () {
+            var params = $("form[name=add-faq-form]").serializeObject();
             params = JSON.stringify(params);
             $.ajax({
                 type: 'post',
