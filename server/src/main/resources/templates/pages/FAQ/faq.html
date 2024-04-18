@@ -33,7 +33,7 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Search Word <small>jQuery Validation</small></h3>
+                <h3 class="card-title">Freqently asked Questions <small>Try this!</small></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -41,12 +41,12 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="cmmStdWordNm">자주하는질문</label>
-                    <input type="text" name="cmmStdWordNm" class="form-control" id="cmmStdWordNm" placeholder="표준단어를 입력하세요.">
+                    <input type="text" name="cmmStdWordNm" class="form-control" id="cmmStdWordNm" placeholder="제목을 입력하세요">
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#add-word">단어등록</button>
+                  <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#add-faq">질문 등록</button>
                   <button type="submit" class="btn btn-primary float-right">검색</button>
                 </div>
               </form>
@@ -95,7 +95,7 @@
         </div>
     </section>
     <!-- /.content -->
-    <div class="modal fade" id="add-word">
+    <div class="modal fade" id="add-faq">
         <form name="add-faq-form" id="add-faq-form">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -177,7 +177,7 @@
               $(this).bootstrapSwitch('state', $(this).prop('checked'));
             });
 
-            $('#add-word').on('hidden.bs.modal', function (e) { // 모달창 닫기 event
+            $('#add-faq').on('hidden.bs.modal', function (e) { // 모달창 닫기 event
                 var form = $("#add-faq-form");
                  form.clearForm();
                  form.find('.error').removeClass('error');
@@ -190,7 +190,7 @@
                   params = JSON.stringify(params);
                   $.ajax({
                       type : 'post',
-                      url : "/cmm/std-word/list",
+                      url : "/faq/list",
                       data : params,
                       contentType : 'application/json',
                       dataType : 'json',
@@ -344,7 +344,7 @@
                         let existFlag = res.data.existFlag;
 
                         if (existFlag) {
-                            $("#modal-warning-close .modal-body").html("이미 존재하는 공통표준단어가 있습니다.");
+                            $("#modal-warning-close .modal-body").html("동일한 제목의 질문이 있습니다.");
                             $("#modal-warning-close .modal-title").html(res.resultMessage);
                             $("#modal-warning-close").modal('toggle');
                         }
