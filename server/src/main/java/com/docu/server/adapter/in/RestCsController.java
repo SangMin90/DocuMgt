@@ -26,21 +26,29 @@ public class RestCsController {
     public ResponseEntity<?> getFaqList(@RequestBody FaqReq req) {
         faqService.getFaqList(req);
 
-        ResponseMessage rsMsg = cmmService.getStdWordList(req);
-        return new ResponseEntity<>(rsMsg, HttpStatus.OK);
+//        ResponseMessage rsMsg = cmmService.getStdWordList(req);
+//        return new ResponseEntity<>(rsMsg, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    @PostMapping("/faq/add")
+/*
+    @PostMapping("/cmm/std-word/add")
     public ResponseEntity<?> addStdWord(@RequestBody WordAddReq req) {
+
+        log.debug("RestCmmController addStdWord parameter: {}", req);
 
         ResponseMessage rsMsg = cmmService.addStdWord(req);
         return new ResponseEntity<>(rsMsg, HttpStatus.OK);
     }
 
-    @PostMapping("/faq/check-duplicate")
+    @PostMapping("/cmm/std-word/check-duplicate")
     public ResponseEntity<?> checkDuplicateStdWord(@RequestBody WordDuplicateReq req) {
+
+        log.debug("RestCmmController checkDuplicateStdWord parameter: {}", req);
 
         ResponseMessage rsMsg = cmmService.checkDuplicateStdWord(req);
         return new ResponseEntity<>(rsMsg, HttpStatus.OK);
     }
+
+
+ */
 }
