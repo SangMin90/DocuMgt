@@ -7,5 +7,5 @@ import java.util.List;
 
 @MapperInterface
 public interface FaqMapper {
-    List<FaqEntity> getFaqList(FaqEntity entity);
+    List<FaqEntity> selectFaqList(FaqEntity entity);
 }
