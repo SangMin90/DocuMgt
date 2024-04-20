@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FaqTitleSearchEntity {
 
-    private String faqTitleName; // 공통표준단어명
-//    private String cmmStdWordNm; // 공통표준단어명
+    private String faqTitleName; // 자주하는 질문 제목
+
 }

@@ -1,22 +1,17 @@
-package com.docu.server.adapter.out.persistence.faq.entity;
+package com.docu.server.domain.faq;
 
-import com.sun.jna.WString;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class FaqEntity {
+public class FaqRes {
     private Long requestFrequencyQuestionId;
     private String requestFrequencyCategory;
     private String requestFrequencyTitle;
     private String requestContents;
-    private String regUserId;
-    private String regDt;
-    private String mdfrUserId;
-    private String mdfrDt;
 }

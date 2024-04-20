@@ -24,11 +24,9 @@ public class RestCsController {
 
     @PostMapping("/faq/list")
     public ResponseEntity<?> getFaqList(@RequestBody FaqReq req) {
-        faqService.getFaqList(req);
 
-//        ResponseMessage rsMsg = cmmService.getStdWordList(req);
-//        return new ResponseEntity<>(rsMsg, HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.OK);
+        ResponseMessage rsMsg = faqService.getFaqList(req);
+        return new ResponseEntity<>(rsMsg, HttpStatus.OK);
     }
 /*
     @PostMapping("/cmm/std-word/add")

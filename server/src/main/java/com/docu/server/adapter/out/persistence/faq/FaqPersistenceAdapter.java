@@ -1,16 +1,19 @@
 package com.docu.server.adapter.out.persistence.faq;
 
-import com.docu.server.adapter.out.persistence.cmm.entity.WordEntity;
 import com.docu.server.adapter.out.persistence.faq.entity.FaqEntity;
+import com.docu.server.adapter.out.persistence.faq.entity.FaqTitleSearchEntity;
 import com.docu.server.biz.faq.port.out.FaqOutPort;
-import com.docu.server.domain.cmm.WordAddReq;
+import com.docu.server.domain.faq.FaqAddReq;
 import com.docu.server.domain.faq.FaqReq;
+import com.docu.server.domain.faq.FaqRes;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class FaqPersistenceAdapter implements FaqOutPort {
@@ -19,11 +22,25 @@ public class FaqPersistenceAdapter implements FaqOutPort {
 
     @Transactional
     @Override
-    public void getFaqList(FaqReq req) {
-        FaqEntity entity = new FaqEntity();
-        List<FaqEntity> faqList = mapper.selectFaqList(entity);
+    public List<FaqRes> getFaqList(FaqReq req) {
+        FaqTitleSearchEntity faqTitleSearchEntity = FaqTitleSearchEntity.builder()
+                .faqTitleName(req.getFaqQuestion()).build();
+        List<FaqEntity> faqEntities = mapper.selectFaqList(faqTitleSearchEntity);
+
+        return faqEntities.stream()
+                .map(faqEntity -> FaqRes.builder()
+                        .requestFrequencyCategory(faqEntity.getRequestFrequencyCategory())
+                        .requestFrequencyTitle(faqEntity.getRequestFrequencyTitle())
+                        .requestContents(faqEntity.getRequestContents())
+                        .build())
+                .toList();
     }
 
+    @Override
+    public int insertRequestFaq(FaqAddReq req) {
+        return 0;
+    }
+    /*
     @Override
     public int insertStdWord(WordAddReq req) {
 
@@ -42,4 +59,5 @@ public class FaqPersistenceAdapter implements FaqOutPort {
 
         return insertCnt;
     }
+     */
 }

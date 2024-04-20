@@ -40,8 +40,8 @@
               <form id="searchForm">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="cmmStdWordNm">자주하는질문</label>
-                    <input type="text" name="cmmStdWordNm" class="form-control" id="cmmStdWordNm" placeholder="제목을 입력하세요">
+                    <label for="faqTitleName">자주하는질문</label>
+                    <input type="text" name="faqTitleName" class="form-control" id="faqTitleName" placeholder="제목을 입력하세요">
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -149,12 +149,13 @@
     <!-- <tr data-widget="expandable-table" aria-expanded="{{if #index==0}}true{{else}}false{{/if}}"> -->
     <tr data-widget="expandable-table" aria-expanded="false">
       <td>{{:~getNumber(#getIndex())}}</td>
-      <td>{{:Category}}</td>
-      <td>{{:title}}</td>
+      <td>{{:requestFrequencyCategory}}</td>
+      <td>{{:requestFrequencyTitle}}</td>
+      <td>{{:requestContents}}</td>
     </tr>
     <!-- <tr class="expandable-body {{if #index!=0}}d-none{{/if}}"> -->
     <tr class="expandable-body d-none">
-      <td colspan="3">
+      <td colspan="4">
         <p>
           {{:contents}}
         </p>
@@ -164,7 +165,7 @@
 
     <script id="listNoTmpl" type="text/x-jsrender">
     <tr data-widget="expandable-table" aria-expanded="false">
-      <td colspan="3" class="text-center">No Search Data</td>
+      <td colspan="4" class="text-center">No Search Data</td>
     </tr>
     </script>
 </th:block>
