@@ -173,6 +173,7 @@
 <th:block layout:fragment="script">
     <script th:inline="javascript">
         $(document).ready(function() {
+            search();
 
             $("input[data-bootstrap-switch]").each(function(){
               $(this).bootstrapSwitch('state', $(this).prop('checked'));
@@ -186,48 +187,50 @@
             });
 
             $.validator.setDefaults({
-              submitHandler: function () {
-                  var params = $("#searchForm").serializeObject();
-                  params = JSON.stringify(params);
-                  $.ajax({
-                      type : 'post',
-                      url : "/faq/list",
-                      data : params,
-                      contentType : 'application/json',
-                      dataType : 'json',
-                      error: function(xhr, status, error) {
-                          console.log(error);
-                      },
-                      success : function (response) {
-                          if(response.statusCode == 200) {
-                              var result = response.data;
-                              //console.log(result);
-                              if(result.length > 0) {
-                                  var templatefn = {
-                                      getSize : () => {
-                                          return result.length-1;
-                                      },
-                                      getNumber :(index) => {
-                                          return result.length - index;
-                                      }
-                                  }
-                                  var template = $.templates("#listTmpl");
-                                  var htmlOutput = template.render(result, templatefn);
-                                  $("#list").html(htmlOutput);
-                                  // $('#expandable-table-header-row').ExpandableTable('toggleRow');
-                              } else {
-                                  var template = $.templates("#listNoTmpl");
-                                  var htmlOutput = template.render();
-                                  $("#list").html(htmlOutput);
-                              }
-                          } else {
-                              $("#modal-warning-close .modal-body").html(response.detailMessage);
-                              $("#modal-warning-close .modal-title").html(response.resultMessage);
-                              $("#modal-warning-close").modal('toggle');
-                          }
-                      }
-                  });
-              }
+              submitHandler: search()
+<!--              submitHandler: function () {-->
+<!--                  var params = $("#searchForm").serializeObject();-->
+<!--                  params = JSON.stringify(params);-->
+<!--                  $.ajax({-->
+<!--                      type : 'post',-->
+<!--                      url : "/faq/list",-->
+<!--                      data : params,-->
+<!--                      contentType : 'application/json',-->
+<!--                      dataType : 'json',-->
+<!--                      error: function(xhr, status, error) {-->
+<!--                          console.log(error);-->
+<!--                      },-->
+<!--                      success : function (response) {-->
+<!--                          if(response.statusCode == 200) {-->
+<!--                              var result = response.data;-->
+<!--                              //console.log(result);-->
+<!--                              if(result.length > 0) {-->
+<!--                                  var templatefn = {-->
+<!--                                      getSize : () => {-->
+<!--                                          return result.length-1;-->
+<!--                                      },-->
+<!--                                      getNumber :(index) => {-->
+<!--                                          return result.length - index;-->
+<!--                                      }-->
+<!--                                  }-->
+<!--                                  var template = $.templates("#listTmpl");-->
+<!--                                  var htmlOutput = template.render(result, templatefn);-->
+<!--                                  $("#list").html(htmlOutput);-->
+<!--                                  // $('#expandable-table-header-row').ExpandableTable('toggleRow');-->
+<!--                              } else {-->
+<!--                                  var template = $.templates("#listNoTmpl");-->
+<!--                                  var htmlOutput = template.render();-->
+<!--                                  $("#list").html(htmlOutput);-->
+<!--                              }-->
+<!--                          } else {-->
+<!--                              $("#modal-warning-close .modal-body").html(response.detailMessage);-->
+<!--                              $("#modal-warning-close .modal-title").html(response.resultMessage);-->
+<!--                              $("#modal-warning-close").modal('toggle');-->
+<!--                          }-->
+<!--                      }-->
+<!--                  });-->
+<!--              }-->
+
             });
 
             $('#searchForm').validate({
@@ -356,6 +359,49 @@
 
         function check_duplicate() {
 
+        }
+
+        function search(){
+                  var params = $("#searchForm").serializeObject();
+                  params = JSON.stringify(params);
+                  $.ajax({
+                      type : 'post',
+                      url : "/faq/list",
+                      data : params,
+                      contentType : 'application/json',
+                      dataType : 'json',
+                      error: function(xhr, status, error) {
+                          console.log(error);
+                      },
+                      success : function (response) {
+                          if(response.statusCode == 200) {
+                              var result = response.data;
+                              //console.log(result);
+                              if(result.length > 0) {
+                                  var templatefn = {
+                                      getSize : () => {
+                                          return result.length-1;
+                                      },
+                                      getNumber :(index) => {
+                                          return result.length - index;
+                                      }
+                                  }
+                                  var template = $.templates("#listTmpl");
+                                  var htmlOutput = template.render(result, templatefn);
+                                  $("#list").html(htmlOutput);
+                                  // $('#expandable-table-header-row').ExpandableTable('toggleRow');
+                              } else {
+                                  var template = $.templates("#listNoTmpl");
+                                  var htmlOutput = template.render();
+                                  $("#list").html(htmlOutput);
+                              }
+                          } else {
+                              $("#modal-warning-close .modal-body").html(response.detailMessage);
+                              $("#modal-warning-close .modal-title").html(response.resultMessage);
+                              $("#modal-warning-close").modal('toggle');
+                          }
+                      }
+                  });
         }
     </script>
 

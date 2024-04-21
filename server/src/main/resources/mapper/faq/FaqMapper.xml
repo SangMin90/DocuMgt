@@ -11,7 +11,7 @@
             , reg_dt
         FROM mgt.request_frequency_question;
         <if test="faqTitleName not in {null, ''}">
-            WHERE request_frequency_title LIKE #{faqTitleName}
+            WHERE request_frequency_title LIKE CONCAT('%', #{faqTitleName}, '%')
         </if>
     </select>
 
