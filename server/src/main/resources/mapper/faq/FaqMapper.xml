@@ -10,7 +10,7 @@
             , reg_user_id
             , reg_dt
         FROM mgt.request_frequency_question;
-        <if test="RequestFrequencyTitle not in {null, ''}">
+        <if test="faqTitleName not in {null, ''}">
             WHERE request_frequency_title LIKE #{faqTitleName}
         </if>
     </select>
