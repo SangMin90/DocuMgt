@@ -24,7 +24,7 @@ public class FaqPersistenceAdapter implements FaqOutPort {
     @Override
     public List<FaqRes> getFaqList(FaqReq req) {
         FaqTitleSearchEntity faqTitleSearchEntity = FaqTitleSearchEntity.builder()
-                .faqTitleName(req.getFaqQuestion()).build();
+                .faqTitleName(req.getFaqTitleName()).build();
         List<FaqEntity> faqEntities = mapper.selectFaqList(faqTitleSearchEntity);
 
         return faqEntities.stream()

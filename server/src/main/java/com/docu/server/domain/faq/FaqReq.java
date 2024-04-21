@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FaqReq {
-    private String faqQuestion;
+    private String faqTitleName;
 }

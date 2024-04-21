@@ -172,9 +172,10 @@
 <!-- index.html inner 스크립트 추가, layout_common.html 의 script 영역으로 들어감 -->
 <th:block layout:fragment="script">
     <script th:inline="javascript">
-        $(document).ready(function() {
-            search();
+        // page 로드 시 자동 조회
+         search();
 
+        $(document).ready(function() {
             $("input[data-bootstrap-switch]").each(function(){
               $(this).bootstrapSwitch('state', $(this).prop('checked'));
             });
@@ -187,49 +188,7 @@
             });
 
             $.validator.setDefaults({
-              submitHandler: search()
-<!--              submitHandler: function () {-->
-<!--                  var params = $("#searchForm").serializeObject();-->
-<!--                  params = JSON.stringify(params);-->
-<!--                  $.ajax({-->
-<!--                      type : 'post',-->
-<!--                      url : "/faq/list",-->
-<!--                      data : params,-->
-<!--                      contentType : 'application/json',-->
-<!--                      dataType : 'json',-->
-<!--                      error: function(xhr, status, error) {-->
-<!--                          console.log(error);-->
-<!--                      },-->
-<!--                      success : function (response) {-->
-<!--                          if(response.statusCode == 200) {-->
-<!--                              var result = response.data;-->
-<!--                              //console.log(result);-->
-<!--                              if(result.length > 0) {-->
-<!--                                  var templatefn = {-->
-<!--                                      getSize : () => {-->
-<!--                                          return result.length-1;-->
-<!--                                      },-->
-<!--                                      getNumber :(index) => {-->
-<!--                                          return result.length - index;-->
-<!--                                      }-->
-<!--                                  }-->
-<!--                                  var template = $.templates("#listTmpl");-->
-<!--                                  var htmlOutput = template.render(result, templatefn);-->
-<!--                                  $("#list").html(htmlOutput);-->
-<!--                                  // $('#expandable-table-header-row').ExpandableTable('toggleRow');-->
-<!--                              } else {-->
-<!--                                  var template = $.templates("#listNoTmpl");-->
-<!--                                  var htmlOutput = template.render();-->
-<!--                                  $("#list").html(htmlOutput);-->
-<!--                              }-->
-<!--                          } else {-->
-<!--                              $("#modal-warning-close .modal-body").html(response.detailMessage);-->
-<!--                              $("#modal-warning-close .modal-title").html(response.resultMessage);-->
-<!--                              $("#modal-warning-close").modal('toggle');-->
-<!--                          }-->
-<!--                      }-->
-<!--                  });-->
-<!--              }-->
+                submitHandler: search()
 
             });
 
