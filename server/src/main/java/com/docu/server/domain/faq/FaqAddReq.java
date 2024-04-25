@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FaqAddReq {
-    private String reqeustFrequencyCategory;
-    private String reqeustFrequencyTitle;
-    private String reqeustFrequencyContents;
+    private String requestFrequencyCategory;
+    private String requestFrequencyTitle;
+    private String requestFrequencyContents;
 //    private String wordDesc;
 }

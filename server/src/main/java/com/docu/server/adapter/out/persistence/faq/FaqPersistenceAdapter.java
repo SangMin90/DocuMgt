@@ -43,9 +43,9 @@ public class FaqPersistenceAdapter implements FaqOutPort {
 
         try {
             FaqEntity entity = FaqEntity.builder()
-                    .requestFrequencyCategory(req.getReqeustFrequencyCategory())
-                    .requestFrequencyTitle(req.getReqeustFrequencyTitle())
-                    .requestFrequencyContents(req.getReqeustFrequencyContents()).build();
+                    .requestFrequencyCategory(req.getRequestFrequencyCategory())
+                    .requestFrequencyTitle(req.getRequestFrequencyTitle())
+                    .requestFrequencyContents(req.getRequestFrequencyContents()).build();
 
             insertCnt = mapper.insertRequestFaq(entity);
         } catch (Exception e) {

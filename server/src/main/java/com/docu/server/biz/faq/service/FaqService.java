@@ -46,8 +46,7 @@ public class FaqService implements FaqInPort {
     public ResponseMessage addRequestFaq(FaqAddReq req) {
         ResponseMessage res;
 
-        try {
-            faqOutPort.insertRequestFaq(req);
+        try {faqOutPort.insertRequestFaq(req);
             res = ResponseMessage.builder()
                     .data(null)
                     .statusCode(HttpStatus.OK.value())

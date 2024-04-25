@@ -100,7 +100,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-requestFrequencyTitle">자주하는 질문</h4>
+                    <h4 class="modal-title">자주하는 질문</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -280,7 +280,7 @@
                         $('#searchForm').submit();
                     } else {
                         $("#modal-warning-close .modal-body").html(res.detailMessage);
-                        $("#modal-warning-close .modal-requestFrequencyTitle").html(res.resultMessage);
+                        $("#modal-warning-close .modal-title").html(res.resultMessage);
                         $("#modal-warning-close").modal('toggle');
                     }
 
@@ -289,7 +289,7 @@
 
         });
 
-        $("#requestFrequencyCategory").blur(function () {
+        $("#requestFrequencyTitle").blur(function () {
             var params = $("form[name=add-faq-form]").serializeObject();
             params = JSON.stringify(params);
             $.ajax({
@@ -307,7 +307,7 @@
 
                         if (existFlag) {
                             $("#modal-warning-close .modal-body").html("동일한 제목의 질문이 있습니다.");
-                            $("#modal-warning-close .modal-requestFrequencyTitle").html(res.resultMessage);
+                            $("#modal-warning-close .modal-title").html(res.resultMessage);
                             $("#modal-warning-close").modal('toggle');
                         }
                     }
@@ -355,7 +355,7 @@
                               }
                           } else {
                               $("#modal-warning-close .modal-body").html(response.detailMessage);
-                              $("#modal-warning-close .modal-requestFrequencyTitle").html(response.resultMessage);
+                              $("#modal-warning-close .modal-title").html(response.resultMessage);
                               $("#modal-warning-close").modal('toggle');
                           }
                       }
