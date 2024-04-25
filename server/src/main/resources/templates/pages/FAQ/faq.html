@@ -33,15 +33,15 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Freqently asked Questions <small>Try this!</small></h3>
+                <h3 class="card-requestFrequencyTitle">Freqently asked Questions <small>Try this!</small></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form id="searchForm">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="faqTitleName">자주하는질문</label>
-                    <input type="text" name="faqTitleName" class="form-control" id="faqTitleName" placeholder="제목을 입력하세요">
+                    <label for="faqrequestFrequencyTitleName">자주하는질문</label>
+                    <input type="text" name="faqrequestFrequencyTitleName" class="form-control" id="faqrequestFrequencyTitleName" placeholder="제목을 입력하세요">
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -100,23 +100,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">자주하는 질문</h4>
+                    <h4 class="modal-requestFrequencyTitle">자주하는 질문</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="Category">구분</label>
-                        <input type="text" class="form-control" name="Category" id="Category" placeholder="카테고리명">
+                        <label for="requestFrequencyCategory">구분</label>
+                        <input type="text" class="form-control" name="requestFrequencyCategory" id="requestFrequencyCategory" placeholder="카테고리명">
                     </div>
                     <div class="form-group">
-                        <label for="title">제목</label>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="질문할 제목">
+                        <label for="requestFrequencyTitle">제목</label>
+                        <input type="text" class="form-control" name="requestFrequencyTitle" id="requestFrequencyTitle" placeholder="질문할 제목">
                     </div>
                     <div class="form-group">
-                        <label for="contents">내용</label>
-                        <input type="text" class="form-control" name="contents" id="contents" placeholder="질문할 내용">
+                        <label for="requestFrequencyContents">내용</label>
+                        <input type="text" class="form-control" name="requestFrequencyContents" id="requestFrequencyContents" placeholder="질문할 내용">
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -151,13 +151,13 @@
       <td>{{:~getNumber(#getIndex())}}</td>
       <td>{{:requestFrequencyCategory}}</td>
       <td>{{:requestFrequencyTitle}}</td>
-      <td>{{:requestContents}}</td>
+      <td>{{:requestFrequencyContents}}</td>
     </tr>
     <!-- <tr class="expandable-body {{if #index!=0}}d-none{{/if}}"> -->
     <tr class="expandable-body d-none">
       <td colspan="4">
         <p>
-          {{:contents}}
+          {{:requestFrequencyContents}}
         </p>
       </td>
     </tr>
@@ -220,24 +220,24 @@
             var validator = $('#add-faq-form').validate({
 
               rules: {
-                Category: {
+                requestFrequencyCategory: {
                   required: true
                 },
-                title: {
+                requestFrequencyTitle: {
                   required: true
                 },
-                contents: {
+                requestFrequencyContents: {
                   required: true
                 }
               },
               messages: {
-                Category: {
+                requestFrequencyCategory: {
                   required: "구분될 카테고리를 입력하세요."
                 },
-                title: {
+                requestFrequencyTitle: {
                   required: "제목을 입력하세요."
                 },
-                contents: {
+                requestFrequencyContents: {
                   required: "질문 내용을 입력하세요."
                 }
               },
@@ -280,7 +280,7 @@
                         $('#searchForm').submit();
                     } else {
                         $("#modal-warning-close .modal-body").html(res.detailMessage);
-                        $("#modal-warning-close .modal-title").html(res.resultMessage);
+                        $("#modal-warning-close .modal-requestFrequencyTitle").html(res.resultMessage);
                         $("#modal-warning-close").modal('toggle');
                     }
 
@@ -289,7 +289,7 @@
 
         });
 
-        $("#Category").blur(function () {
+        $("#requestFrequencyCategory").blur(function () {
             var params = $("form[name=add-faq-form]").serializeObject();
             params = JSON.stringify(params);
             $.ajax({
@@ -307,7 +307,7 @@
 
                         if (existFlag) {
                             $("#modal-warning-close .modal-body").html("동일한 제목의 질문이 있습니다.");
-                            $("#modal-warning-close .modal-title").html(res.resultMessage);
+                            $("#modal-warning-close .modal-requestFrequencyTitle").html(res.resultMessage);
                             $("#modal-warning-close").modal('toggle');
                         }
                     }
@@ -355,7 +355,7 @@
                               }
                           } else {
                               $("#modal-warning-close .modal-body").html(response.detailMessage);
-                              $("#modal-warning-close .modal-title").html(response.resultMessage);
+                              $("#modal-warning-close .modal-requestFrequencyTitle").html(response.resultMessage);
                               $("#modal-warning-close").modal('toggle');
                           }
                       }

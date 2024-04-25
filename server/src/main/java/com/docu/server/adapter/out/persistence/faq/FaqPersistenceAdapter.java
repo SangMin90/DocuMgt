@@ -31,7 +31,7 @@ public class FaqPersistenceAdapter implements FaqOutPort {
                 .map(faqEntity -> FaqRes.builder()
                         .requestFrequencyCategory(faqEntity.getRequestFrequencyCategory())
                         .requestFrequencyTitle(faqEntity.getRequestFrequencyTitle())
-                        .requestContents(faqEntity.getRequestContents())
+                        .requestFrequencyContents(faqEntity.getRequestFrequencyContents())
                         .build())
                 .toList();
     }
@@ -45,7 +45,7 @@ public class FaqPersistenceAdapter implements FaqOutPort {
             FaqEntity entity = FaqEntity.builder()
                     .requestFrequencyCategory(req.getReqeustFrequencyCategory())
                     .requestFrequencyTitle(req.getReqeustFrequencyTitle())
-                    .requestContents(req.getReqeustFrequencyContents()).build();
+                    .requestFrequencyContents(req.getReqeustFrequencyContents()).build();
 
             insertCnt = mapper.insertRequestFaq(entity);
         } catch (Exception e) {

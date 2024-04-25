@@ -13,5 +13,5 @@ public class FaqRes {
     private Long requestFrequencyQuestionId;
     private String requestFrequencyCategory;
     private String requestFrequencyTitle;
-    private String requestContents;
+    private String requestFrequencyContents;
 }

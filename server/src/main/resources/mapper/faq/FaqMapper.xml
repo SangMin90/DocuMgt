@@ -28,7 +28,7 @@
             (
               #{requestFrequencyCategory}
             , #{requestFrequencyTitle}
-            , #{requestContents}
+            , #{requestFrequencyContents}
             , 'admin'
             , 'admin'
             )

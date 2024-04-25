@@ -14,7 +14,7 @@ public class FaqEntity {
     private Long requestFrequencyQuestionId;
     private String requestFrequencyCategory;
     private String requestFrequencyTitle;
-    private String requestContents;
+    private String requestFrequencyContents;
     private String regUserId;
     private String regDt;
     private String mdfrUserId;
