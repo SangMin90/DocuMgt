@@ -2,10 +2,12 @@ package com.docu.server.adapter.in;
 
 import com.docu.server.biz.cmm.port.in.CmmInPort;
 import com.docu.server.biz.faq.port.in.FaqInPort;
+import com.docu.server.biz.faq.service.FaqService;
 import com.docu.server.domain.cmm.WordAddReq;
 import com.docu.server.domain.cmm.WordDuplicateReq;
 import com.docu.server.domain.cmm.WordReq;
 import com.docu.server.domain.common.ResponseMessage;
+import com.docu.server.domain.faq.FaqAddReq;
 import com.docu.server.domain.faq.FaqReq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,16 +30,17 @@ public class RestCsController {
         ResponseMessage rsMsg = faqService.getFaqList(req);
         return new ResponseEntity<>(rsMsg, HttpStatus.OK);
     }
-/*
-    @PostMapping("/cmm/std-word/add")
-    public ResponseEntity<?> addStdWord(@RequestBody WordAddReq req) {
 
-        log.debug("RestCmmController addStdWord parameter: {}", req);
+    @PostMapping("/faq/insert")
+    public ResponseEntity<?> addRequestFaq(@RequestBody FaqAddReq req) {
 
-        ResponseMessage rsMsg = cmmService.addStdWord(req);
+//        log.debug("RestCmmController addStdWord parameter: {}", req);
+
+        ResponseMessage rsMsg = faqService.addRequestFaq(req);
         return new ResponseEntity<>(rsMsg, HttpStatus.OK);
     }
 
+    /*
     @PostMapping("/cmm/std-word/check-duplicate")
     public ResponseEntity<?> checkDuplicateStdWord(@RequestBody WordDuplicateReq req) {
 

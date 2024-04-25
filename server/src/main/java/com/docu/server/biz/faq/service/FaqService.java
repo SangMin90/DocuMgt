@@ -3,6 +3,7 @@ package com.docu.server.biz.faq.service;
 import com.docu.server.biz.faq.port.in.FaqInPort;
 import com.docu.server.biz.faq.port.out.FaqOutPort;
 import com.docu.server.domain.common.ResponseMessage;
+import com.docu.server.domain.faq.FaqAddReq;
 import com.docu.server.domain.faq.FaqReq;
 import com.docu.server.domain.faq.FaqRes;
 import lombok.RequiredArgsConstructor;
@@ -40,13 +41,13 @@ public class FaqService implements FaqInPort {
 
     }
 
-    /*
+
     @Override
-    public ResponseMessage insertRequestFaq(FaqAddReq req) {
+    public ResponseMessage addRequestFaq(FaqAddReq req) {
         ResponseMessage res;
 
         try {
-            FaqOutPort.insertRequestFaq(req);
+            faqOutPort.insertRequestFaq(req);
             res = ResponseMessage.builder()
                     .data(null)
                     .statusCode(HttpStatus.OK.value())
@@ -62,5 +63,5 @@ public class FaqService implements FaqInPort {
 
         return res;
     }
-     */
+
 }

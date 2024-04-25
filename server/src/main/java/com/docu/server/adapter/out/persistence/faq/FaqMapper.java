@@ -9,4 +9,6 @@ import java.util.List;
 @MapperInterface
 public interface FaqMapper {
     List<FaqEntity> selectFaqList(FaqTitleSearchEntity entity);
+
+    int insertRequestFaq(FaqEntity entity);
 }

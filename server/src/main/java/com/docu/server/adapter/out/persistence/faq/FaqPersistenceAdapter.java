@@ -38,26 +38,21 @@ public class FaqPersistenceAdapter implements FaqOutPort {
 
     @Override
     public int insertRequestFaq(FaqAddReq req) {
-        return 0;
-    }
-    /*
-    @Override
-    public int insertStdWord(WordAddReq req) {
 
         int insertCnt = 0;
 
         try {
-            WordEntity entity = WordEntity.builder()
-                    .wordName(req.getWordName())
-                    .engWordName(req.getEngWordName())
-                    .wordDesc(req.getWordDesc()).build();
+            FaqEntity entity = FaqEntity.builder()
+                    .requestFrequencyCategory(req.getReqeustFrequencyCategory())
+                    .requestFrequencyTitle(req.getReqeustFrequencyTitle())
+                    .requestContents(req.getReqeustFrequencyContents()).build();
 
-            insertCnt = mapper.insertStdWord(entity);
+            insertCnt = mapper.insertRequestFaq(entity);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
 
         return insertCnt;
     }
-     */
+
 }

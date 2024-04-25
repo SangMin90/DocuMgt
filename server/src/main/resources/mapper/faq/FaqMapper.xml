@@ -15,24 +15,24 @@
         </if>
     </select>
 
-<!--    <insert id="insertStdWord" parameterType="WordEntity">-->
-<!--        INSERT INTO mgt.request_frequency_question-->
-<!--        (-->
-<!--          word_name-->
-<!--        , eng_word_name-->
-<!--        , word_desc-->
-<!--        , reg_user_id-->
-<!--        , mdfr_user_id-->
-<!--        )-->
-<!--        VALUES-->
-<!--            (-->
-<!--              #{wordName}-->
-<!--            , #{engWordName}-->
-<!--            , #{wordDesc}-->
-<!--            , 'admin'-->
-<!--            , 'admin'-->
-<!--            )-->
-<!--    </insert>-->
+    <insert id="insertRequestFaq" parameterType="FaqEntity">
+        INSERT INTO mgt.request_frequency_question
+        (
+          request_frequency_category
+        , request_frequency_title
+        , request_frequency_contents
+        , reg_user_id
+        , mdfr_user_id
+        )
+        VALUES
+            (
+              #{requestFrequencyCategory}
+            , #{requestFrequencyTitle}
+            , #{requestContents}
+            , 'admin'
+            , 'admin'
+            )
+    </insert>
 
 <!--    <select id="exists" parameterType="WordEntity" resultType="java.lang.Integer">-->
 <!--        SELECT-->
