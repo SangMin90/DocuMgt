@@ -8,6 +8,12 @@ public class BusinessController {
 
     @GetMapping("/businessCard")
     public String businessCard() {
-        return "businessCard.html";
+        return "businessCard";
+    }
+
+    // 화면 노출
+    @GetMapping("/business")
+    public String renderBusinessStdWord() {
+        return "pages/business/card";
     }
 }

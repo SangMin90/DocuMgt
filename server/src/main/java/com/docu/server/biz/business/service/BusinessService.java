@@ -16,12 +16,14 @@ public class BusinessService implements BusinessInPort {
 
     private final BusinessOutPort businessOutPort;
 
+    // businessOutPort를 bean으로 등록해야한다.
+
     @Override
     public ResponseMessage getBusinessList(BusinessReq req) {
         ResponseMessage res;
 
         try {
-            List<BusinessRes> buinsessLists = businessOutPort.getBusinessList(req);
+            List<BusinessRes> businessLists = businessOutPort.getBusinessList(req);
             res = ResponseMessage.builder()
                     .data(businessLists)
                     .statusCode(HttpStatus.OK.value())

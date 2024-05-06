@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BusinessReq {
 
-    private String cmmStdWordNm;
+    private String businessStdWordNm;
 }

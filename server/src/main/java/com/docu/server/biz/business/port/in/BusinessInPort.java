@@ -6,7 +6,7 @@ import com.docu.server.domain.common.ResponseMessage;
 
 public interface BusinessInPort {
 
-    ResponseMessage getBusinessWordList(BusinessReq req);
+    ResponseMessage getBusinessList(BusinessReq req);
 
-    ResponseMessage addBusinessWord(BusinessAddReq req);
+    ResponseMessage addRequestBusiness(BusinessAddReq req);
 }
