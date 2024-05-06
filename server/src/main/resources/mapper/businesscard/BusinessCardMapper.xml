@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.docu.server.adapter.out.persistence.businesscard.BusinessCardMapper">
+
+    <select id="selectBusinessCard" parameterType="BusinessCardSearchEntity" resultType="BusinessCardEntity">
+        SELECT
+        business_card_id
+        , business_name
+        , business_com
+        , business_dept
+        , business_position
+        , project_name
+        , business_contact
+        , business_phone_number
+        , business_email
+        , business_address
+        , card_image_url
+        , reg_user_id
+        , reg_dt
+        , mdfr_user_id
+        , mdfr_dt
+        FROM mgt.business_card
+        <where>
+            <if test="businessName not in {null, ''}">
+                OR business_name LIKE #{businessName}
+            </if>
+            <if test="businessCom not in {null, ''}">
+                OR business_com LIKE #{businessCom}
+            </if>
+            <if test="businessDept not in {null, ''}">
+                OR business_dept LIKE #{businessDept}
+            </if>
+            <if test="businessPosition not in {null, ''}">
+                OR business_position LIKE #{businessPosition}
+            </if>
+            <if test="projectName not in {null, ''}">
+                OR project_name LIKE #{projectName}
+            </if>
+            <if test="businessContact not in {null, ''}">
+                OR business_contact LIKE #{businessContact}
+            </if>
+            <if test="businessPhoneNumber not in {null, ''}">
+                OR business_phone_number LIKE #{businessPhoneNumber}
+            </if>
+            <if test="businessEmail not in {null, ''}">
+                OR business_email LIKE #{businessEmail}
+            </if>
+            <if test="businessAddress not in {null, ''}">
+                OR business_address LIKE #{businessAddress}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertBusinessCard" parameterType="BusinessCardEntity">
+        INSERT INTO mgt.business_card
+        (
+            business_name
+        , business_com
+        , business_dept
+        , business_position
+        , project_name
+        , business_contact
+        , business_phone_number
+        , business_email
+        , business_address
+        , card_image_url
+        , reg_user_id
+        , mdfr_user_id
+        )
+        VALUES
+            (
+                #{businessName}
+            , #{businessCom}
+            , #{businessDept}
+            , #{businessPosition}
+            , #{projectName}
+            , #{businessContact}
+            , #{businessPhoneNumber}
+            , #{businessEmail}
+            , #{businessAddress}
+            , #{cardImageUrl}
+            , 'admin'
+            , 'admin'
+            )
+    </insert>
+
+    <select id="existsBusinessCard" parameterType="BusinessCardEntity" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*) AS cnt
+        FROM mgt.business_card
+        <where>
+            <if test="businessName not in {null, ''}">
+                OR business_name = #{businessName}
+            </if>
+            <if test="businessEmail not in {null, ''}">
+                OR business_email = #{businessEmail}
+            </if>
+        </where>
+    </select>
+</mapper>
