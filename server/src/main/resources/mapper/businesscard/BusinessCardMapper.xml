@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.docu.server.adapter.out.persistence.businesscard.BusinessCardMapper">
 
-    <select id="selectBusinessCard" parameterType="BusinessCardSearchEntity" resultType="BusinessCardEntity">
+    <select id="selectBusinessCard" parameterType="BusinessCardSearchEntity" resultType="BusinessEntity">
         SELECT
         business_card_id
         , business_name
@@ -51,7 +51,7 @@
         </where>
     </select>
 
-    <insert id="insertBusinessCard" parameterType="BusinessCardEntity">
+    <insert id="insertBusinessCard" parameterType="BusinessEntity">
         INSERT INTO mgt.business_card
         (
             business_name
@@ -84,7 +84,7 @@
             )
     </insert>
 
-    <select id="existsBusinessCard" parameterType="BusinessCardEntity" resultType="java.lang.Integer">
+    <select id="existsBusinessCard" parameterType="BusinessEntity" resultType="java.lang.Integer">
         SELECT
         COUNT(*) AS cnt
         FROM mgt.business_card
