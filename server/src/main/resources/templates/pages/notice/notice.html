@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout_common}"
+      >
+<body>
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" layout:fragment="content">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">공지사항</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/main">Home</a></li>
+              <li class="breadcrumb-item active">공지사항</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+        <!-- search -->
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-noticeTitle">Freqently asked Questions <small>Try this!</small></h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form id="searchForm">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="noticeTitleName">공지사항</label>
+                    <input type="text" name="noticeTitleName" class="form-control" id="noticeTitleName" placeholder="제목을 입력하세요">
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#add-notice">질문 등록</button>
+                  <button type="submit" class="btn btn-primary float-right">검색</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+            </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
+
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+        <!-- /.search -->
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr class="text-center">
+                            <th>No</th>
+                            <th>구분</th>
+                            <th>제목</th>
+                            <th>내용</th>
+                        </tr>
+                      </thead>
+                      <tbody id="list">
+                        <tr data-widget="expandable-table" aria-expanded="false">
+                          <td colspan="4" class="text-center">No Data</td>
+                        </tr>
+                        <tr class="expandable-body">
+                          <td colspan="4">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+    <!-- /.content -->
+    <div class="modal fade" id="add-notice">
+        <form name="add-notice-form" id="add-notice-form">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">공지사항</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="noticeCategory">구분</label>
+                        <input type="text" class="form-control" name="noticeCategory" id="noticeCategory" placeholder="카테고리명">
+                    </div>
+                    <div class="form-group">
+                        <label for="noticeTitle">제목</label>
+                        <input type="text" class="form-control" name="noticeTitle" id="noticeTitle" placeholder="질문할 제목">
+                    </div>
+                    <div class="form-group">
+                        <label for="noticeContents">내용</label>
+                        <input type="text" class="form-control" name="noticeContents" id="noticeContents" placeholder="질문할 내용">
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="save" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+        </form>
+    </div>
+    <!-- /.modal -->
+    <th:block th:insert="pages/pages_modals"></th:block>
+  </div>
+  <!-- /.content-wrapper -->
+</body>
+<!-- index.html inner CSS 추가, config.html 의 css 영역으로 들어감 -->
+<th:block layout:fragment="fragmentCss"></th:block>
+
+<!-- index.html inner JS 추가, config.html 의 script 영역으로 들어감 -->
+<th:block layout:fragment="fragmentScript">
+    <script th:src="@{/vendor/jquery/js/additional-methods.min.js}"></script>
+    <script th:src="@{/vendor/jsrender/jsrender.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap-switch/js/bootstrap-switch.min.js}"></script>
+</th:block>
+
+<th:block layout:fragment="jsTemplate">
+    <script id="listTmpl" type="text/x-jsrender">
+    <!-- <tr data-widget="expandable-table" aria-expanded="{{if #index==0}}true{{else}}false{{/if}}"> -->
+    <tr data-widget="expandable-table" aria-expanded="false">
+      <td>{{:~getNumber(#getIndex())}}</td>
+      <td>{{:noticeCategory}}</td>
+      <td>{{:noticeTitle}}</td>
+      <td>{{:noticeContents}}</td>
+    </tr>
+    <!-- <tr class="expandable-body {{if #index!=0}}d-none{{/if}}"> -->
+    <tr class="expandable-body d-none">
+      <td colspan="4">
+        <p>
+          {{:noticeContents}}
+        </p>
+      </td>
+    </tr>
+    </script>
+
+    <script id="listNoTmpl" type="text/x-jsrender">
+    <tr data-widget="expandable-table" aria-expanded="false">
+      <td colspan="4" class="text-center">No Search Data</td>
+    </tr>
+    </script>
+</th:block>
+<!-- index.html inner 스크립트 추가, layout_common.html 의 script 영역으로 들어감 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        // page 로드 시 자동 조회
+         search();
+
+        $(document).ready(function() {
+            $("input[data-bootstrap-switch]").each(function(){
+              $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            });
+
+            $('#add-notice').on('hidden.bs.modal', function (e) { // 모달창 닫기 event
+                var form = $("#add-notice-form");
+                 form.clearForm();
+                 form.find('.error').removeClass('error');
+                 form.find('.is-invalid').removeClass('is-invalid');
+            });
+
+            $.validator.setDefaults({
+                submitHandler: search
+            });
+
+            $('#searchForm').validate({
+              rules: {
+                cmnStnTrmNm: {
+                  required: true,
+                  minlength: 1,
+                }
+              },
+              messages: {
+                cmnStnTrmNm: {
+                  required: "Please enter a Domain Name",
+                  cmnStnTrmNm: "Please enter a valid domain names"
+                }
+              },
+              errorElement: 'span',
+              errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+              },
+              highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+              },
+              unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+              }
+            });
+
+            var validator = $('#add-notice-form').validate({
+
+              rules: {
+                noticeCategory: {
+                  required: true
+                },
+                noticeTitle: {
+                  required: true
+                },
+                noticeContents: {
+                  required: true
+                }
+              },
+              messages: {
+                noticeCategory: {
+                  required: "구분될 카테고리를 입력하세요."
+                },
+                noticeTitle: {
+                  required: "제목을 입력하세요."
+                },
+                noticeContents: {
+                  required: "질문 내용을 입력하세요."
+                }
+              },
+              errorElement: 'span',
+              errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+              },
+              highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+              },
+              unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+              }
+
+            });
+        });
+
+        //단어 저장
+        $("button[id='save']").click(function () {
+
+            if($("#add-notice-form").valid()===false) {
+                 return false;
+            }
+
+            var params = $("form[name=add-notice-form]").serializeObject();
+            params = JSON.stringify(params);
+            $.ajax({
+                type : 'post',
+                url : '/notice/insert',
+                data : params,
+                contentType: 'application/json',
+                dataType : 'json',
+                error: function(xhr, status, error){
+                    console.log(error);
+                },
+                success : function(res){
+                    if(res.statusCode == 200) {
+                        $("#cmnStnWrdNm").val($("#cmnStnWrdNm").val());
+                        $('#searchForm').submit();
+                    } else {
+                        $("#modal-warning-close .modal-body").html(res.detailMessage);
+                        $("#modal-warning-close .modal-title").html(res.resultMessage);
+                        $("#modal-warning-close").modal('toggle');
+                    }
+
+                }
+            });
+
+        });
+/*
+        $("#noticeTitle").blur(function () {
+            var params = $("form[name=add-notice-form]").serializeObject();
+            params = JSON.stringify(params);
+            $.ajax({
+                type: 'post',
+                url: '/cmm/std-word/check-duplicate',
+                data: params,
+                contentType: 'application/json',
+                dataType: 'json',
+                error: function (xhr, status, error) {
+                    console.log(error);
+                },
+                success: function (res) {
+                    if(res.statusCode === 200) {
+                        let existFlag = res.data.existFlag;
+
+                        if (existFlag) {
+                            $("#modal-warning-close .modal-body").html("동일한 제목의 질문이 있습니다.");
+                            $("#modal-warning-close .modal-title").html(res.resultMessage);
+                            $("#modal-warning-close").modal('toggle');
+                        }
+                    }
+                }
+            });
+        })
+
+        */
+
+        function check_duplicate() {
+
+        }
+
+        function search(){
+                  var params = $("#searchForm").serializeObject();
+                  params = JSON.stringify(params);
+                  $.ajax({
+                      type : 'post',
+                      url : "/notice/list",
+                      data : params,
+                      contentType : 'application/json',
+                      dataType : 'json',
+                      error: function(xhr, status, error) {
+                          console.log(error);
+                      },
+                      success : function (response) {
+                          if(response.statusCode == 200) {
+                              var result = response.data;
+                              //console.log(result);
+                              if(result.length > 0) {
+                                  var templatefn = {
+                                      getSize : () => {
+                                          return result.length-1;
+                                      },
+                                      getNumber :(index) => {
+                                          return result.length - index;
+                                      }
+                                  }
+                                  var template = $.templates("#listTmpl");
+                                  var htmlOutput = template.render(result, templatefn);
+                                  $("#list").html(htmlOutput);
+                                  // $('#expandable-table-header-row').ExpandableTable('toggleRow');
+                              } else {
+                                  var template = $.templates("#listNoTmpl");
+                                  var htmlOutput = template.render();
+                                  $("#list").html(htmlOutput);
+                              }
+                          } else {
+                              $("#modal-warning-close .modal-body").html(response.detailMessage);
+                              $("#modal-warning-close .modal-title").html(response.resultMessage);
+                              $("#modal-warning-close").modal('toggle');
+                          }
+                      }
+                  });
+        }
+    </script>
+
+</th:block>
+
+</html>
