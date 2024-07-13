@@ -1,5 +1,6 @@
 package com.docu.server.biz.cmm.port.in;
 
+import com.docu.server.domain.cmm.CommonGroupCodeReq;
 import com.docu.server.domain.cmm.WordAddReq;
 import com.docu.server.domain.cmm.WordDuplicateReq;
 import com.docu.server.domain.cmm.WordReq;
@@ -12,4 +13,6 @@ public interface CmmInPort {
     ResponseMessage addStdWord(WordAddReq req);
 
     ResponseMessage checkDuplicateStdWord(WordDuplicateReq req);
+
+    ResponseMessage selectCommonCodeList(CommonGroupCodeReq req);
 }

@@ -11,4 +11,6 @@ public interface CmmOutPort {
     int insertStdWord(WordAddReq req);
 
     WordDuplicateRes exists(WordDuplicateReq req);
+
+    List<CommonGroupCodeRes> selectCommonCodeList(CommonGroupCodeReq req);
 }

@@ -1,8 +1,10 @@
 package com.docu.server.adapter.out.persistence.cmm;
 
+import com.docu.server.adapter.out.persistence.cmm.entity.GroupCodeEntity;
 import com.docu.server.adapter.out.persistence.cmm.entity.WordEntity;
 import com.docu.server.adapter.out.persistence.cmm.entity.WordSearchEntity;
 import com.docu.server.config.annotation.MapperInterface;
+import com.docu.server.domain.cmm.CommonGroupCodeRes;
 
 import java.util.List;
 
@@ -13,4 +15,6 @@ public interface CmmMapper {
     int insertStdWord(WordEntity entity);
 
     int exists(WordEntity entity);
+
+    List<GroupCodeEntity> selectCommonCodeList(GroupCodeEntity entity);
 }

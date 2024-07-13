@@ -1,5 +1,6 @@
 package com.docu.server.adapter.in;
 
+import com.docu.server.domain.cmm.CommonGroupCodeReq;
 import com.docu.server.domain.cmm.WordAddReq;
 import com.docu.server.domain.cmm.WordDuplicateReq;
 import com.docu.server.domain.cmm.WordReq;
@@ -44,6 +45,15 @@ public class RestCmmController {
         log.debug("RestCmmController checkDuplicateStdWord parameter: {}", req);
 
         ResponseMessage rsMsg = cmmService.checkDuplicateStdWord(req);
+        return new ResponseEntity<>(rsMsg, HttpStatus.OK);
+    }
+
+    @PostMapping("/cmm/cd/grp-cd-list")
+    public ResponseEntity<?> getCommonCodeList(@RequestBody CommonGroupCodeReq req) {
+
+        log.debug("RestCmmController selectCommonCodeList parameter: {}", req);
+
+        ResponseMessage rsMsg = cmmService.selectCommonCodeList(req);
         return new ResponseEntity<>(rsMsg, HttpStatus.OK);
     }
 }
