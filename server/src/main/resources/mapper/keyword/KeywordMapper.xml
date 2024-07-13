@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.docu.server.adapter.out.persistence.keyword.KeywordMapper">
+
+    <select id="selectKeywordList" parameterType="KeywordEntity" resultType="KeywordEntity">
+        SELECT
+                keyword_id,
+                keyword_name,
+                keyword_desc,
+                keyword_use_flag,
+                reg_user_id,
+                reg_dt,
+                mdfr_user_id,
+                mdfr_dt
+          FROM mgt.keyword
+    </select>
+
+    <insert id="insertRequestFaq" parameterType="FaqEntity">
+        INSERT INTO mgt.request_frequency_question
+        (
+          request_frequency_category
+        , request_frequency_title
+        , request_frequency_contents
+        , reg_user_id
+        , mdfr_user_id
+        )
+        VALUES
+            (
+              #{requestFrequencyCategory}
+            , #{requestFrequencyTitle}
+            , #{requestFrequencyContents}
+            , 'admin'
+            , 'admin'
+            )
+    </insert>
+
+<!--    <select id="exists" parameterType="WordEntity" resultType="java.lang.Integer">-->
+<!--        SELECT-->
+<!--        COUNT(*) AS cnt-->
+<!--        FROM  mgt.request_frequency_question-->
+<!--        <where>-->
+<!--            <if test="wordName not in {null, ''}">-->
+<!--                OR word_name = #{wordName}-->
+<!--            </if>-->
+<!--            <if test="engWordName not in {null, ''}">-->
+<!--                OR eng_word_name = #{engWordName}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+<!--    -->
+<!--    -->
+</mapper>
