@@ -81,4 +81,27 @@ public class CmmService implements CmmInPort {
 
         return res;
     }
+
+    @Override
+    public ResponseMessage selectCommonCodeList(CommonGroupCodeReq req) {
+        ResponseMessage res;
+
+        try {
+            List<CommonGroupCodeRes> result = cmmOutPort.selectCommonCodeList(req);
+
+            res = ResponseMessage.builder()
+                    .data(result)
+                    .statusCode(HttpStatus.OK.value())
+                    .resultMessage("공통그룹코드 조회 성공")
+                    .build();
+        } catch (Exception e) {
+            res = ResponseMessage.builder()
+                    .data(null)
+                    .statusCode(HttpStatus.FORBIDDEN.value())
+                    .resultMessage("공통그룹코드 조회 실패")
+                    .build();
+        }
+
+        return res;
+    }
 }

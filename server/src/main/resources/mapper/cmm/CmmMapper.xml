@@ -50,4 +50,21 @@
             </if>
         </where>
     </select>
+
+    <select id="selectCommonCodeList" parameterType="GroupCodeEntity" resultType="GroupCodeEntity">
+        SELECT grp_cd_id
+             , grp_cd_nm
+             , grp_cd_odr
+             , grp_cd_use_yn
+             , reg_user_id
+             , reg_dt
+             , mdfr_user_id
+             , mdfr_dt
+          FROM mgt.tm_cmm_grp_cd
+        <where>
+            <if test="grpCdNm not in {null, ''}">
+                OR grp_cd_nm LIKE '%'||#{grpCdNm}||'%'
+            </if>
+        </where>
+    </select>
 </mapper>

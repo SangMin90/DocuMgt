@@ -1,5 +1,6 @@
 package com.docu.server.adapter.out.persistence.cmm;
 
+import com.docu.server.adapter.out.persistence.cmm.entity.GroupCodeEntity;
 import com.docu.server.adapter.out.persistence.cmm.entity.WordEntity;
 import com.docu.server.adapter.out.persistence.cmm.entity.WordSearchEntity;
 import com.docu.server.biz.cmm.port.out.CmmOutPort;
@@ -8,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -76,6 +76,31 @@ public class CmmPersistenceAdapter implements CmmOutPort {
             log.error(e.getMessage());
         }
 
+        return res;
+    }
+
+    @Override
+    public List<CommonGroupCodeRes> selectCommonCodeList(CommonGroupCodeReq req) {
+        List<CommonGroupCodeRes> res = null;
+        try {
+            GroupCodeEntity entity = GroupCodeEntity.builder()
+                    .grpCdNm(req.getCodeGroupName())
+                    .build();
+            List<GroupCodeEntity> results = mapper.selectCommonCodeList(entity);
+
+            res = results.stream()
+                    .map(result ->
+                            CommonGroupCodeRes.builder()
+                                    .grpCdId(result.getGrpCdId())
+                                    .grpCdNm(result.getGrpCdNm())
+                                    .cdOdr(result.getGrpCdOdr())
+                                    .cdUseYn(result.getGrpCdUseYn())
+                                    .build()
+                    )
+                    .toList();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
         return res;
     }
 }

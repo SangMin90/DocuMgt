@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout_common}"
+      >
+<body>
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" layout:fragment="content">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">공통코드관리</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/main">Home</a></li>
+              <li class="breadcrumb-item active">공통코드관리</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+        <!-- search -->
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Search Code <small>공통코드 조회</small></h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form id="searchForm">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="codeGroupName">코드그룹명</label>
+                    <input type="text" name="codeGroupName" class="form-control" id="codeGroupName" placeholder="코드그룹명을 입력하세요.">
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#add-word">단어등록</button>
+                  <button type="submit" class="btn btn-primary float-right">검색</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- /.row -->
+        <!-- /.search -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">공통코드</h3>
+            <div class="card-tools">
+            <!-- Remove Button -->
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" id="masterAdd">추가</button>
+                <button type="button" class="btn btn-danger btn-sm" id="masterDelete">삭제</button>
+                <button type="button" class="btn btn-success btn-sm" id="masterSave">변경저장</button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div id="jsGrid-m"></div>
+          </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">하위 공통코드</h3>
+                <div class="card-tools">
+                    <!-- Remove Button -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm" id="detailAdd">추가</button>
+                        <button type="button" class="btn btn-danger btn-sm" id="detailDelete">삭제</button>
+                        <button type="button" class="btn btn-success btn-sm" id="detailSave">변경저장</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="jsGrid-d"></div>
+            </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.modal -->
+    <th:block th:insert="pages/pages_modals"></th:block>
+  </div>
+  <!-- /.content-wrapper -->
+</body>
+<!-- index.html inner CSS 추가, config.html 의 css 영역으로 들어감 -->
+<th:block layout:fragment="fragmentCss">
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <link rel="stylesheet" th:href="@{/vendor/select2/css/select2.min.css}">
+    <link rel="stylesheet" th:href="@{/vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css}">
+</th:block>
+
+<!-- index.html inner JS 추가, config.html 의 script 영역으로 들어감 -->
+<th:block layout:fragment="fragmentScript">
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+    <script th:src="@{/vendor/jsrender/jsrender.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap-switch/js/bootstrap-switch.min.js}"></script>
+</th:block>
+
+<th:block layout:fragment="jsTemplate">
+    <script id="listNoTmpl" type="text/x-jsrender">
+    <tr data-widget="expandable-table" aria-expanded="false">
+      <td colspan="3" class="text-center">No Search Data</td>
+    </tr>
+    </script>
+</th:block>
+<!-- index.html inner 스크립트 추가, layout_common.html 의 script 영역으로 들어감 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        let gridM = "";
+        let gridD = "";
+
+        $("button[id='masterAdd']").click(function () {
+
+            gridM.appendRow({},{
+                at : gridM.getRowCount(),
+                focus : true
+            });
+        });
+
+        $("button[id='masterDelete']").click(function () {
+
+            var rowKey = $('input[name^=selectRadio]:checked').val();
+            if(rowKey != undefined) {
+                gridM.removeRow(rowKey);
+            } else {
+                $("#modal-warning-close .modal-body").html("삭제대상 공통코드를 선택해 주세요.");
+                $("#modal-warning-close .modal-title").html("삭제 오류");
+                $("#modal-warning-close").modal('toggle');
+            }
+        });
+
+        $("button[id='masterSave']").click(function () {
+
+            var listVar = gridM.getModifiedRows();
+
+            if(listVar.createdRows.length > 0 || listVar.deletedRows.length > 0 || listVar.updatedRows.length > 0) {
+
+                var params = {"cdInsertReq" : listVar.createdRows, "cdUpdateReq" : listVar.updatedRows, "cdDeleteReq" : listVar.deletedRows, "dtlDelYn" : "Y"};
+                params = JSON.stringify(params);
+
+                if(listVar.deletedRows.length > 0) {
+                    if (!confirm("삭제시에는 하위 코드까지 삭제 됩니다. 진행하시겠습니까?")) {
+                        return false;
+                    }
+                }
+
+                $.ajax({
+                    type : 'put',
+                    url : "/cmn/cd/gridData",
+                    data : params,
+                    contentType : 'application/json',
+                    dataType : 'json',
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    },
+                    success : function (response) {
+                        if(response.statusCode == 200) {
+                            alert("정상 처리 되었습니다.");
+                            //detailList(gridM, $('input[name=selectRadio]:checked').val());
+                        } else {
+                            $("#modal-warning-close .modal-body").html(response.detailMessage);
+                            $("#modal-warning-close .modal-title").html(response.resultMessage);
+                            $("#modal-warning-close").modal('toggle');
+                        }
+                    }
+                });
+
+            } else {
+                $("#modal-info-close .modal-body").html("변경된 내용이 없어 저장이 불가능합니다.");
+                $("#modal-info-close .modal-title").html("저장 실패");
+                $("#modal-info-close").modal('toggle');
+            }
+        });
+
+        $("button[id='detailAdd']").click(function () {
+
+            var listVar = $('input[name^=selectRadio]:checked').val();
+            if(listVar != undefined) {
+                var upCdId = gridM.getValue(listVar, "cdId");
+                gridD.appendRow({"upCdId":upCdId},{
+                    at : gridD.getRowCount(),
+                    focus : true
+                });
+            } else {
+                $("#modal-warning-close .modal-body").html("상위 공통코드를 선택해 주세요.");
+                $("#modal-warning-close .modal-title").html("추가 오류");
+                $("#modal-warning-close").modal('toggle');
+            }
+        });
+
+        $("button[id='detailDelete']").click(function () {
+
+            var listVar = gridD.getCheckedRows();
+            if(listVar.length > 0) {
+                listVar.forEach(function(item, index) {
+                    gridD.removeRow(item.rowKey);
+                });
+            } else {
+                $("#modal-warning-close .modal-body").html("삭제대상 공통코드를 체크해 주세요.");
+                $("#modal-warning-close .modal-title").html("삭제 오류");
+                $("#modal-warning-close").modal('toggle');
+            }
+        });
+
+        $("button[id='detailSave']").click(function () {
+
+            var listVar = gridD.getModifiedRows();
+
+            if(listVar.createdRows.length > 0 || listVar.deletedRows.length > 0 || listVar.updatedRows.length > 0) {
+
+                var params = {"cdInsertReq" : listVar.createdRows, "cdUpdateReq" : listVar.updatedRows, "cdDeleteReq" : listVar.deletedRows, "dtlDelYn" : "Y"};
+                params = JSON.stringify(params);
+
+                $.ajax({
+                    type : 'put',
+                    url : "/cmn/cd/gridData",
+                    data : params,
+                    contentType : 'application/json',
+                    dataType : 'json',
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    },
+                    success : function (response) {
+                        if(response.statusCode == 200) {
+                            alert("정상 처리 되었습니다.");
+                            detailList(gridM, $('input[name=selectRadio]:checked').val());
+                        } else {
+                            $("#modal-warning-close .modal-body").html(response.detailMessage);
+                            $("#modal-warning-close .modal-title").html(response.resultMessage);
+                            $("#modal-warning-close").modal('toggle');
+                        }
+                    }
+                });
+
+            } else {
+                $("#modal-info-close .modal-body").html("변경된 내용이 없어 저장이 불가능합니다.");
+                $("#modal-info-close .modal-title").html("저장 실패");
+                $("#modal-info-close").modal('toggle');
+            }
+        });
+
+        function detailList(grid,rowKey) {
+
+            gridD.clear();
+
+            var params = {"upCdId" : grid.getElement(rowKey, 'cdId').innerText};
+            params = JSON.stringify(params);
+            $.ajax({
+                type : 'post',
+                url : "/cmn/cd/list",
+                data : params,
+                contentType : 'application/json',
+                dataType : 'json',
+                error: function(xhr, status, error) {
+                    console.log(error);
+                },
+                success : function (response) {
+                    if(response.statusCode == 200) {
+                        var result = response.data;
+                        //console.log(result);
+                        if(result.length > 0) {
+                            gridD.resetData(result);
+                        }
+                    } else {
+                        $("#modal-warning-close .modal-body").html(response.detailMessage);
+                        $("#modal-warning-close .modal-title").html(response.resultMessage);
+                        $("#modal-warning-close").modal('toggle');
+                    }
+                }
+            });
+        };
+
+        $(document).ready(function() {
+
+            $.validator.setDefaults({
+                submitHandler: function () {
+                    var params = $("#searchForm").serializeObject();
+                    params = JSON.stringify(params);
+                    $.ajax({
+                        type : 'post',
+                        url : "/cmm/cd/grp-cd-list",
+                        data : params,
+                        contentType : 'application/json',
+                        dataType : 'json',
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        },
+                        success : function (response) {
+                            if(response.statusCode == 200) {
+                                var result = response.data;
+                                //console.log(result);
+                                if(result.length > 0) {
+                                    gridM.resetData(result);
+                                }
+                            } else {
+                                $("#modal-warning-close .modal-body").html(response.detailMessage);
+                                $("#modal-warning-close .modal-title").html(response.resultMessage);
+                                $("#modal-warning-close").modal('toggle');
+                            }
+                        }
+                    });
+                }
+            });
+
+            $('#searchForm').validate({
+                rules: {
+                    cmnStnTrmNm: {
+                        required: true,
+                        minlength: 1,
+                    }
+                },
+                messages: {
+                    cmnStnTrmNm: {
+                        required: "Please enter a Domain Name",
+                        cmnStnTrmNm: "Please enter a valid domain names"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+
+            class CustomTextEditor {
+                constructor(props) {
+                    const el = document.createElement('input');
+                    const { maxLength } = props.columnInfo.editor.options;
+
+                    el.type = 'text';
+                    el.maxLength = maxLength;
+                    el.value = String(props.value ? props.value: "");
+
+                    this.el = el;
+                }
+
+                getElement() {
+                    return this.el;
+                }
+
+                getValue() {
+                    return this.el.value;
+                }
+
+                mounted() {
+                    this.el.select();
+                }
+            };
+
+            class CustomRadio{
+                constructor(props) {
+                    const { grid, rowKey } = props;
+
+                    const el = document.createElement("input");
+                    el.type = "radio";
+                    el.name = "selectRadio";
+                    el.id = String("selectRadio" +"_"+ rowKey);
+                    el.value = rowKey;
+
+                    el.addEventListener('click', (ev) => {
+                        if(grid.getValue(rowKey,"cdId") != null) {//입력된 값이 있는경우만 조회
+                            detailList(grid, rowKey);
+                        }
+                    });
+
+                    this.el = el;
+                    this.render(props);
+                }
+
+                getElement() {
+                    return this.el;
+                }
+
+                render(props) {
+                    this.el.checked = Boolean(props.value);
+                }
+            }
+
+            gridM = new tui.Grid({
+                el: document.getElementById('jsGrid-m'),
+                scrollX: false,
+                scrollY: false,
+                rowHeaders: [{
+                    header: "선택",
+                    name: 'rowNum',
+                    width: 50,
+                    renderer: { type: CustomRadio}
+                }],
+                columns: [
+                    {
+                        header: '코드ID',
+                        name: 'grpCdId',
+                        width: 100,
+                        align: 'center',
+                        editor: {
+                            type: CustomTextEditor,
+                            options: {
+                                maxLength: 10
+                            }
+                        },
+                        validation: { required: true }
+                    },
+                    {
+                        header: '코드명',
+                        name: 'grpCdNm',
+                        editor: {
+                            type: CustomTextEditor,
+                            options: {
+                                maxLength: 10
+                            }
+                        },
+                        validation: { required: true }
+                    },
+                    {
+                        header: '코드정렬순서',
+                        width: 100,
+                        align: 'right',
+                        name: 'cdOdr',
+                        editor: {
+                            type: CustomTextEditor,
+                            options: {
+                                maxLength: 10
+                            }
+                        },
+                        validation: {
+                            regExp: /^[0-9]+$/,
+                            required: true
+                        }
+                    },
+                    {
+                        header: '코드사용여부',
+                        name: 'cdUseYn',
+                        formatter: 'listItemText',
+                        width: 100,
+                        align: 'center',
+                        editor: {
+                            type: 'select',
+                            options: {
+                                listItems: [
+                                    { text: '사용', value: 'Y' },
+                                    { text: '미사용', value: 'N' }
+                                ]
+                            }
+                        }
+                        ,
+                        validation: { required: true }
+                    }
+                ],
+                columnOptions: {
+                    resizable: true
+                }
+            });
+            gridM.on('beforeChange', ev => {
+                //console.log('before change:', ev);
+            });
+            gridM.on('afterChange', ev => {
+                //console.log('after change:', ev);
+            });
+
+            gridM.on('check', ev => {
+                //console.log('check!', ev);
+
+            });
+
+            gridD = new tui.Grid({
+                el: document.getElementById('jsGrid-d'),
+                scrollX: false,
+                scrollY: false,
+                rowHeaders: ['checkbox'],
+                columns: [
+                    {
+                        header: '코드ID',
+                        name: 'cdId',
+                        width: 100,
+                        align: 'center',
+                        editor: {
+                            type: CustomTextEditor,
+                            options: {
+                                maxLength: 10
+                            }
+                        },
+                        validation: { required: true }
+                    },
+                    {
+                        header: '상위코드ID',
+                        name: 'upCdId',
+                        width: 100,
+                        align: 'center',
+                        validation: { required: true }
+                    },
+                    {
+                        header: '코드명',
+                        name: 'cdNm',
+                        editor: {
+                            type: CustomTextEditor,
+                            options: {
+                                maxLength: 10
+                            }
+                        },
+                        validation: { required: true }
+                    },
+                    {
+                        header: '코드그룹명',
+                        name: 'cdGroupId',
+                        editor: {
+                            type: CustomTextEditor,
+                            options: {
+                                maxLength: 10
+                            }
+                        }
+                    },
+                    {
+                        header: '코드분류명',
+                        name: 'cdClsfId',
+                        editor: {
+                            type: CustomTextEditor,
+                            options: {
+                                maxLength: 10
+                            }
+                        }
+                    },
+                    {
+                        header: '코드정렬순서',
+                        width: 100,
+                        align: 'right',
+                        name: 'cdSortSn',
+                        editor: {
+                            type: CustomTextEditor,
+                            options: {
+                                maxLength: 10
+                            }
+                        },
+                        validation: {
+                            regExp: /^[0-9]+$/,
+                            required: true
+                        }
+                    },
+                    {
+                        header: '코드사용여부',
+                        name: 'cdUseYn',
+                        formatter: 'listItemText',
+                        width: 100,
+                        align: 'center',
+                        editor: {
+                            type: 'select',
+                            options: {
+                                listItems: [
+                                    { text: '사용', value: 'Y' },
+                                    { text: '미사용', value: 'N' }
+                                ]
+                            }
+                        },
+                        validation: { required: true }
+                    }
+                ],
+                columnOptions: {
+                    resizable: true
+                }
+            });
+            gridD.on('beforeChange', ev => {
+                //console.log('before change:', ev);
+            });
+            gridD.on('afterChange', ev => {
+                //console.log('after change:', ev);
+            });
+
+        });
+    </script>
+
+</th:block>
+
+</html>
