@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,12 +22,13 @@ public class RestNoticeController {
     private final NoticeInPort noticeService;
 
     @PostMapping("/notice/list")
-    public ResponseEntity<?> getNoticeList(@RequestBody NoticeReq req) {
+    public ResponseEntity<ResponseMessage> getNoticeList(@RequestBody NoticeReq req) {
 
         ResponseMessage rsMsg = noticeService.getNoticeList(req);
+
         return new ResponseEntity<>(rsMsg, HttpStatus.OK);
     }
-
+/*
     @PostMapping("/notice/insert")
     public ResponseEntity<?> addRequestNotice(@RequestBody NoticeAddReq req) {
 
@@ -34,5 +36,5 @@ public class RestNoticeController {
 
         ResponseMessage rsMsg = noticeService.addRequestNotice(req);
         return new ResponseEntity<>(rsMsg, HttpStatus.OK);
-    }
+    } */
 }

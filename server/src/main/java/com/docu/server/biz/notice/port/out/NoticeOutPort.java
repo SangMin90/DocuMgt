@@ -3,11 +3,13 @@ package com.docu.server.biz.notice.port.out;
 import com.docu.server.domain.faq.FaqAddReq;
 import com.docu.server.domain.faq.FaqReq;
 import com.docu.server.domain.faq.FaqRes;
+import com.docu.server.domain.notice.NoticeReq;
+import com.docu.server.domain.notice.NoticeRes;
 
 import java.util.List;
 
 public interface NoticeOutPort {
-    List<NoticeRes> getNoticeList(FaqReq req);
+    List<NoticeRes> getNoticeList(NoticeReq req);
 
 //    int insertRequestFaq(FaqAddReq req);
 }

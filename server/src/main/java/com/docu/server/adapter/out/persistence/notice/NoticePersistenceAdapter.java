@@ -1,12 +1,18 @@
 package com.docu.server.adapter.out.persistence.notice;
 
+import com.docu.server.adapter.out.persistence.keyword.entity.KeywordEntity;
+import com.docu.server.adapter.out.persistence.notice.entity.NoticeEntity;
 import com.docu.server.biz.notice.port.out.NoticeOutPort;
 import com.docu.server.domain.faq.FaqReq;
+import com.docu.server.domain.keyword.KeywordRes;
 import com.docu.server.domain.notice.NoticeReq;
+import com.docu.server.domain.notice.NoticeRes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -14,10 +20,23 @@ import java.util.List;
 @Slf4j
 public class NoticePersistenceAdapter implements NoticeOutPort {
 
-    private final NoticeMapper mapper;
+    private final NoticeMapper noticeMapper;
 
+    @Transactional
     @Override
-    public void getNoticeList(NoticeReq req){
+    public List<NoticeRes> getNoticeList(NoticeReq req) {
+        NoticeEntity entity = NoticeEntity.builder()
+                .noticeTitle(req.getNoticeTitle())
+                .build();
+
+        List<KeywordEntity> result = noticeMapper.selectNoticeList(entity);
+
+        List<NoticeReq> res = new ArrayList<>();
+        for (KeywordEntity noticeEntity : result) {
+            res.add(NoticeRes.builder().noticeTitle(NoticeEntity.getNoticeTitle()).keywordDesc(keywordEntity.getKeywordDesc()).build());
+        }
+
+        return res;
 
     }
 }

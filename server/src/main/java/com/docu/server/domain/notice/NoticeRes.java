@@ -5,10 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NoticeReq {
-    private String NoticeTitle;
+@Builder
+public class NoticeRes {
+
+    private String noticeTitle;
+    private String noticeContent;
 }
