@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CustomerControllerNotice {
-    @GetMapping("/customer/notice")
+    @GetMapping("/notice/list")
     public String memberManagement() {
-        return "customerNoticeManage.html";
+        return "pages/notice/notice";
     }
 }
 
