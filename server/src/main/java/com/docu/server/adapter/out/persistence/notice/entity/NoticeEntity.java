@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class NoticeEntity {
-    Private string noticeId;
-    Private string noticeUserId;
-    Private string noticeGubunCode;
-    Private string noticeTitle;
-    Private string noticeContent;
-    Private string noticePopupFlag;
-    Private string noticeBeginDate;
-    Private string noticeEndDate;
-    Private string regUserId;
+    private String noticeId;
+    private String noticeUserId;
+    private String noticeGubunCode;
+    private String noticeTitle;
+    private String noticeContent;
+    private String noticePopupFlag;
+    private String noticeBeginDate;
+    private String noticeEndDate;
+    private String regUserId;
 
 }

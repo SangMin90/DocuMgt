@@ -6,5 +6,5 @@ import com.docu.server.adapter.out.persistence.notice.entity.NoticeEntity;
 import java.util.List;
 
 public interface NoticeMapper {
-    List<KeywordEntity> selectNoticeList(NoticeEntity entity);
+    List<KeywordEntity> getNoticeList(NoticeEntity entity);
 }
