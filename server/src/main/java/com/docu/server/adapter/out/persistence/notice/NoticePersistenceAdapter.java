@@ -29,12 +29,12 @@ public class NoticePersistenceAdapter implements NoticeOutPort {
                 .noticeTitle(req.getNoticeTitle())
                 .build();
 
-        List<KeywordEntity> result = noticeMapper.getNoticeList(entity);
+        List<NoticeEntity> result = noticeMapper.getNoticeList(entity);
 
-        List<NoticeReq> res = new ArrayList<>();
-        for (KeywordEntity noticeEntity : result) {
-            res.add(NoticeRes.builder().noticeTitle(NoticeEntity.ge())
-                    .keywordDesc(NoticeEntity.getKeywordDesc()).build());
+        List<NoticeRes> res = new ArrayList<>();
+        for (NoticeEntity noticeEntity : result) {
+            res.add(NoticeRes.builder().noticeTitle(noticeEntity.getNoticeTitle())
+                    .noticeContent(noticeEntity.getNoticeContent()).build());
         }
 
         return res;
