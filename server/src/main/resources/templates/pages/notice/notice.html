@@ -32,8 +32,7 @@
           <div class="col-md-12">
             <!-- jquery validation -->
             <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-noticeTitle">Freqently asked Questions <small>Try this!</small></h3>
+                <h3 class="card-noticeTitle">Notice <small>anyThing anyWay!</small></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -46,7 +45,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#add-notice">질문 등록</button>
+                  <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#add-notice">공지 등록</button>
                   <button type="submit" class="btn btn-primary float-right">검색</button>
                 </div>
               </form>
@@ -115,8 +114,8 @@
                         <input type="text" class="form-control" name="noticeTitle" id="noticeTitle" placeholder="질문할 제목">
                     </div>
                     <div class="form-group">
-                        <label for="noticeContents">내용</label>
-                        <input type="text" class="form-control" name="noticeContents" id="noticeContents" placeholder="질문할 내용">
+                        <label for="noticeContent">내용</label>
+                        <input type="text" class="form-control" name="noticeContent" id="noticeContent" placeholder="질문할 내용">
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -149,15 +148,15 @@
     <!-- <tr data-widget="expandable-table" aria-expanded="{{if #index==0}}true{{else}}false{{/if}}"> -->
     <tr data-widget="expandable-table" aria-expanded="false">
       <td>{{:~getNumber(#getIndex())}}</td>
-      <td>{{:noticeCategory}}</td>
+      <td>{{:noticeGubunCode}}</td>
       <td>{{:noticeTitle}}</td>
-      <td>{{:noticeContents}}</td>
+      <td>{{:noticeContent}}</td>
     </tr>
     <!-- <tr class="expandable-body {{if #index!=0}}d-none{{/if}}"> -->
     <tr class="expandable-body d-none">
       <td colspan="4">
         <p>
-          {{:noticeContents}}
+          {{:noticeContent}}
         </p>
       </td>
     </tr>
@@ -336,7 +335,7 @@
                       success : function (response) {
                           if(response.statusCode == 200) {
                               var result = response.data;
-                              //console.log(result);
+                              console.log(result);
                               if(result.length > 0) {
                                   var templatefn = {
                                       getSize : () => {

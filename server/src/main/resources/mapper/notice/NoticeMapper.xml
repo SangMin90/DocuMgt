@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.docu.server.adapter.out.persistence.notice.N">
+<mapper namespace="com.docu.server.adapter.out.persistence.notice.NoticeMapper">
 
-    <select id="getNoticeList" parameterType="NoticeEntity" resultType="NoticeEntity">
+    <select id="getNoticeList" parameterType="NoticeTitleSearchEntity" resultType="NoticeEntity">
         SELECT
             notice_id,
             notice_user_id,
@@ -11,6 +11,9 @@
             notice_content,
             notice_popup_flag
         FROM mgt.notice
+        <if test="noticeTitle not in {null, ''}">
+            WHERE notice_title LIKE CONCAT('%', #{noticeTitleName}, '%')
+        </if>
     </select>
 
 
