@@ -1,10 +1,8 @@
 package com.docu.server.adapter.out.persistence.notice;
 
-import com.docu.server.adapter.out.persistence.keyword.entity.KeywordEntity;
 import com.docu.server.adapter.out.persistence.notice.entity.NoticeEntity;
+import com.docu.server.adapter.out.persistence.notice.entity.NoticeTitleSearchEntity;
 import com.docu.server.biz.notice.port.out.NoticeOutPort;
-import com.docu.server.domain.faq.FaqReq;
-import com.docu.server.domain.keyword.KeywordRes;
 import com.docu.server.domain.notice.NoticeReq;
 import com.docu.server.domain.notice.NoticeRes;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -25,19 +22,16 @@ public class NoticePersistenceAdapter implements NoticeOutPort {
     @Transactional
     @Override
     public List<NoticeRes> getNoticeList(NoticeReq req) {
-        NoticeEntity entity = NoticeEntity.builder()
-                .noticeTitle(req.getNoticeTitle())
+        NoticeTitleSearchEntity noticeTitleSearchEntity = NoticeTitleSearchEntity.builder()
+                .noticeTitleName(req.getNoticeTitle())
                 .build();
 
-        List<NoticeEntity> result = noticeMapper.getNoticeList(entity);
+        List<NoticeEntity> noticeEntities = noticeMapper.getNoticeList(noticeTitleSearchEntity);
 
-        List<NoticeRes> res = new ArrayList<>();
-        for (NoticeEntity noticeEntity : result) {
-            res.add(NoticeRes.builder().noticeTitle(noticeEntity.getNoticeTitle())
-                    .noticeContent(noticeEntity.getNoticeContent()).build());
-        }
-
-        return res;
+        return noticeEntities.stream().map(noticeEntity -> NoticeRes.builder()
+                .noticeTitle(noticeEntity.getNoticeTitle())
+                .noticeContent(noticeEntity.getNoticeContent())
+                .build()).toList();
 
     }
 }

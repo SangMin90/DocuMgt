@@ -3,10 +3,10 @@ package com.docu.server.biz.notice.service;
 import com.docu.server.biz.notice.port.in.NoticeInPort;
 import com.docu.server.biz.notice.port.out.NoticeOutPort;
 import com.docu.server.domain.common.ResponseMessage;
-import com.docu.server.domain.keyword.KeywordRes;
 import com.docu.server.domain.notice.NoticeReq;
 import com.docu.server.domain.notice.NoticeRes;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +19,24 @@ public class NoticeService implements NoticeInPort {
 
     @Override
     public ResponseMessage getNoticeList(NoticeReq req) {
+        ResponseMessage res;
 
 
-        List<NoticeRes> res = noticeOutPort.getNoticeList(req);
+        try{
+            List<NoticeRes> noticeResLists = noticeOutPort.getNoticeList(req);
+            res = ResponseMessage.builder()
+                    .data(noticeResLists)
+                    .statusCode(HttpStatus.OK.value())
+                    .resultMessage("공지사항 조회 완료")
+                    .build();
+        }catch (Exception e){
+            res = ResponseMessage.builder()
+                    .data(null)
+                    .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .resultMessage("공지사항 조회 실패")
+                    .build();
+        }
 
-        return ResponseMessage.builder().data(res).statusCode(200).build();
+        return res;
     }
 }

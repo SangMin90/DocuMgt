@@ -1,16 +1,12 @@
 package com.docu.server.adapter.in;
 
-import com.docu.server.biz.faq.port.in.FaqInPort;
 import com.docu.server.biz.notice.port.in.NoticeInPort;
 import com.docu.server.domain.common.ResponseMessage;
-import com.docu.server.domain.faq.FaqAddReq;
-import com.docu.server.domain.faq.FaqReq;
 import com.docu.server.domain.notice.NoticeReq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
