@@ -11,7 +11,7 @@
             notice_content,
             notice_popup_flag
         FROM mgt.notice
-        <if test="noticeTitle not in {null, ''}">
+        <if test="noticeTitleName not in {null, ''}">
             WHERE notice_title LIKE CONCAT('%', #{noticeTitleName}, '%')
         </if>
     </select>
