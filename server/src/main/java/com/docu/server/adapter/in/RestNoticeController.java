@@ -2,6 +2,7 @@ package com.docu.server.adapter.in;
 
 import com.docu.server.biz.notice.port.in.NoticeInPort;
 import com.docu.server.domain.common.ResponseMessage;
+import com.docu.server.domain.notice.NoticeAddReq;
 import com.docu.server.domain.notice.NoticeReq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,10 +22,9 @@ public class RestNoticeController {
     public ResponseEntity<ResponseMessage> getNoticeList(@RequestBody NoticeReq req) {
 
         ResponseMessage rsMsg = noticeService.getNoticeList(req);
-
         return new ResponseEntity<>(rsMsg, HttpStatus.OK);
     }
-/*
+
     @PostMapping("/notice/insert")
     public ResponseEntity<?> addRequestNotice(@RequestBody NoticeAddReq req) {
 
@@ -32,5 +32,5 @@ public class RestNoticeController {
 
         ResponseMessage rsMsg = noticeService.addRequestNotice(req);
         return new ResponseEntity<>(rsMsg, HttpStatus.OK);
-    } */
+    }
 }
