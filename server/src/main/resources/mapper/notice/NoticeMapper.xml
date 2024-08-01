@@ -18,7 +18,7 @@
 
 
     <insert id="insertNotice" parameterType="NoticeEntity">
-        INSERT INTO mgt.request_frequency_question
+        INSERT INTO mgt.notice
         (
             notice_title,
             notice_content,
