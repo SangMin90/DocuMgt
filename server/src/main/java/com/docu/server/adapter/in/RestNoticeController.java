@@ -28,7 +28,7 @@ public class RestNoticeController {
     @PostMapping("/notice/insert")
     public ResponseEntity<?> addRequestNotice(@RequestBody NoticeAddReq req) {
 
-//        log.debug("RestCmmController addStdWord parameter: {}", req);
+        log.debug("RestCmmController addStdWord parameter: {}", req);
 
         ResponseMessage rsMsg = noticeService.addRequestNotice(req);
         return new ResponseEntity<>(rsMsg, HttpStatus.OK);

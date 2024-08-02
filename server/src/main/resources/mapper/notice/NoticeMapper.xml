@@ -17,7 +17,7 @@
     </select>
 
 
-    <insert id="insertNotice" parameterType="NoticeEntity">
+    <insert id="insertRequestNotice" parameterType="NoticeEntity">
         INSERT INTO mgt.notice
         (
             notice_title,
