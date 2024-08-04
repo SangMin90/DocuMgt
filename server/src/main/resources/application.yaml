@@ -8,6 +8,12 @@ spring:
     username: root
     password: 1234
 
+  security:
+    user:
+      name: test
+      password: 1234
+      roles: USER
+
 resource:
   thymeleaf:
     prefix: classpath:/templates/
