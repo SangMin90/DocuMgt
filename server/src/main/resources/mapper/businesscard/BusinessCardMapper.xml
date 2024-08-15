@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.docu.server.adapter.out.persistence.businesscard.BusinessCardMapper">
 
-    <select id="selectBusinessCard" parameterType="BusinessCardSearchEntity" resultType="BusinessEntity">
+    <select id="selectBusinessList" parameterType="BusinessCardSearchEntity" resultType="BusinessEntity">
         SELECT
         business_card_id
         , business_name
@@ -21,10 +21,10 @@
         , mdfr_dt
         FROM mgt.business_card
         <where>
-            <if test="businessName not in {null, ''}">
-                OR business_name LIKE #{businessName}
+            <if test="businessCardNm not in {null, ''}">
+                OR business_name LIKE #{businessCardNm}
             </if>
-            <if test="businessCom not in {null, ''}">
+            <!--<if test="businessCom not in {null, ''}">
                 OR business_com LIKE #{businessCom}
             </if>
             <if test="businessDept not in {null, ''}">
@@ -47,7 +47,7 @@
             </if>
             <if test="businessAddress not in {null, ''}">
                 OR business_address LIKE #{businessAddress}
-            </if>
+            </if>-->
         </where>
     </select>
 

@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BusinessRes {
-    private Long id;
-    private String wordName;
-    private String engWordName;
-    private String wordDesc;
+    private String businessName;
+    private String businessCom;
 }

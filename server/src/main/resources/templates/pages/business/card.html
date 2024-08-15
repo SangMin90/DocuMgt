@@ -40,13 +40,13 @@
               <form id="searchForm">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="cmmStdWordNm">표준단어</label>
-                    <input type="text" name="cmmStdWordNm" class="form-control" id="cmmStdWordNm" placeholder="표준단어를 입력하세요.">
+                    <label for="businessStdWordNm">명함이름</label>
+                    <input type="text" name="businessStdWordNm" class="form-control" id="businessStdWordNm" placeholder="명함이름을 입력하세요.">
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#add-word">단어등록</button>
+                  <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#add-word">명함등록</button>
                   <button type="submit" class="btn btn-primary float-right">검색</button>
                 </div>
               </form>
@@ -70,8 +70,8 @@
                       <thead>
                         <tr class="text-center">
                           <th>순번</th>
-                          <th>공통표준단어명</th>
-                          <th>공통표준단어 영문명</th>
+                          <th>이름</th>
+                          <th>회사명</th>
                         </tr>
                       </thead>
                       <tbody id="list">
@@ -99,23 +99,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">공통표준단어 등록</h4>
+                    <h4 class="modal-title">명함 등록</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="wordName">공통표준단어명</label>
-                        <input type="text" class="form-control" name="wordName" id="wordName" placeholder="공통표준단어명">
+                        <label for="businessName">이름</label>
+                        <input type="text" class="form-control" name="wordName" id="businessName" placeholder="이름">
                     </div>
                     <div class="form-group">
-                        <label for="engWordName">공통표준단어 영문명</label>
-                        <input type="text" class="form-control" name="engWordName" id="engWordName" placeholder="공통표준단어 영문명">
+                        <label for="engBusinessName">이름 영문명</label>
+                        <input type="text" class="form-control" name="engWordName" id="engBusinessName" placeholder="이름 영문명">
                     </div>
                     <div class="form-group">
-                        <label for="wordDesc">공통표준단어 설명</label>
-                        <input type="text" class="form-control" name="wordDesc" id="wordDesc" placeholder="공통표준단어 설명">
+                        <label for="companyDesc">회사 설명</label>
+                        <input type="text" class="form-control" name="wordDesc" id="companyDesc" placeholder="회사 설명">
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -148,17 +148,10 @@
     <!-- <tr data-widget="expandable-table" aria-expanded="{{if #index==0}}true{{else}}false{{/if}}"> -->
     <tr data-widget="expandable-table" aria-expanded="false">
       <td>{{:~getNumber(#getIndex())}}</td>
-      <td>{{:wordName}}</td>
-      <td>{{:engWordName}}</td>
+      <td>{{:businessName}}</td>
+      <td>{{:businessCom}}</td>
     </tr>
     <!-- <tr class="expandable-body {{if #index!=0}}d-none{{/if}}"> -->
-    <tr class="expandable-body d-none">
-      <td colspan="3">
-        <p>
-          {{:wordDesc}}
-        </p>
-      </td>
-    </tr>
     </script>
 
     <script id="listNoTmpl" type="text/x-jsrender">
@@ -189,7 +182,7 @@
                   params = JSON.stringify(params);
                   $.ajax({
                       type : 'post',
-                      url : "/cmm/std-word/list",
+                      url : "/business",
                       data : params,
                       contentType : 'application/json',
                       dataType : 'json',

@@ -10,12 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class BusinessEntity {
-    private Long id;
-    private String wordName;
-    private String engWordName;
-    private String wordDesc;
-    private String regUserId;
-    private String regDt;
-    private String mdfrUserId;
-    private String mdfrDt;
+    private String businessName;
+    private String businessCom;
+
 }
