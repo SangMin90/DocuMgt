@@ -4,23 +4,11 @@ server:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    jdbc-url: jdbc:mariadb://localhost:3306/mgt
-    username: root
-    password: 1234
-
-  security:
-    user:
-      name: test
-      password: 1234
-      roles: USER
+    jdbc-url: ${database.jdbc.url}
+    username: ${database.username}
+    password: ${database.password}
 
 resource:
   thymeleaf:
     prefix: classpath:/templates/
-    #prefix: file:src/main/resources/templates/
     cache: false
-
-logging:
-  level:
-    root: DEBUG
-    org.springframework.boot: ERROR
