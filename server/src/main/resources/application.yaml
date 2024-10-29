@@ -12,3 +12,9 @@ resource:
   thymeleaf:
     prefix: classpath:/templates/
     cache: false
+
+logging:
+  level:
+    org:
+    springframework:
+      security: TRACE
